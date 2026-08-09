@@ -1,0 +1,5 @@
+# Unused holdover from an earlier design direction (licensed font — not for
+# public redistribution) and duplicate/original source images already
+# copied into assets/ under their final filenames.
+assets/fonts/
+assets/images/
