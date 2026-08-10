@@ -57,7 +57,7 @@ document.querySelectorAll('a, button').forEach(el => {
   });
 });
 
-const revealItems = document.querySelectorAll('.section, .stat, .project-card, .capability, .timeline-item, .quotes blockquote, .edu-grid > div');
+const revealItems = document.querySelectorAll('.section, .stat, .project-card, .capability, .timeline-item, .quotes blockquote, .edu-grid > div, .system-step');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
