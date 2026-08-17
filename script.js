@@ -47,15 +47,30 @@ document.querySelectorAll('a, button').forEach(el => {
     if (!ring) return;
     ring.style.width = '44px';
     ring.style.height = '44px';
-    ring.style.borderColor = 'rgba(210,42,37,.8)';
+    ring.style.borderColor = '#ffc900';
+    ring.style.background = 'rgba(255,201,0,.15)';
   });
   el.addEventListener('mouseleave', () => {
     if (!ring) return;
     ring.style.width = '28px';
     ring.style.height = '28px';
-    ring.style.borderColor = 'rgba(255,255,255,.5)';
+    ring.style.borderColor = 'rgba(17,17,17,.4)';
+    ring.style.background = 'transparent';
   });
 });
+
+// Hero headline cycler — swaps the big role statement every few seconds,
+// pausing on the last ("I BUILD SYSTEMS.") slightly longer since it's the
+// core positioning line.
+const cycleSpans = document.querySelectorAll('.hero-cycle .cycle-track span');
+if (cycleSpans.length > 1) {
+  let cycleIndex = 0;
+  setInterval(() => {
+    cycleSpans[cycleIndex].classList.remove('active');
+    cycleIndex = (cycleIndex + 1) % cycleSpans.length;
+    cycleSpans[cycleIndex].classList.add('active');
+  }, 2600);
+}
 
 const revealItems = document.querySelectorAll('.section, .stat, .project-card, .capability, .timeline-item, .quotes blockquote, .edu-grid > div, .system-step');
 const observer = new IntersectionObserver(entries => {
