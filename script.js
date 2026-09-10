@@ -1,17 +1,17 @@
-document.documentElement.classList.add('js');
-
-// Preloader: wipe-reveal on every page load, wipe-cover before internal
-// navigation — so clicking Videos/Graphics/AI Workflows/About (or any
-// same-origin link) feels like one continuous transition rather than a
-// hard page cut, matching Bazil's own load-in/transition mechanism.
+// Preloader: two panels glitch-jitter then wipe open on load, revealing the
+// page. Hero content (kicker, CTAs, paragraph) fades up right after, and the
+// headline runs its own typewriter animation (see below).
 (() => {
   const preloader = document.querySelector('.preloader');
+  const heroReveal = document.querySelectorAll('.hero-reveal');
   if (!preloader) return;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (reduceMotion) {
     document.body.classList.remove('loading');
     preloader.classList.add('done');
+    heroReveal.forEach(el => el.classList.add('in-view'));
+    typeHeroTitle();
     return;
   }
 
@@ -19,201 +19,159 @@ document.documentElement.classList.add('js');
     setTimeout(() => {
       document.body.classList.remove('loading');
       preloader.classList.add('done');
-    }, 1150);
-  });
-
-  const isInternalPageLink = (a) => {
-    if (!a || !a.href) return false;
-    if (a.target && a.target !== '_self') return false;
-    if (a.hasAttribute('download')) return false;
-    let url;
-    try { url = new URL(a.href, location.href); } catch { return false; }
-    if (url.origin !== location.origin) return false;
-    if (url.pathname === location.pathname) return false; // same-page anchor, let smooth-scroll handle it
-    return true;
-  };
-
-  document.addEventListener('click', (e) => {
-    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    const a = e.target.closest('a');
-    if (!isInternalPageLink(a)) return;
-    e.preventDefault();
-    preloader.classList.remove('done');
-    preloader.classList.add('exiting');
-    document.body.classList.add('loading');
-    setTimeout(() => { window.location.href = a.href; }, 480);
+      heroReveal.forEach((el, i) => {
+        setTimeout(() => el.classList.add('in-view'), i * 120);
+      });
+      setTimeout(typeHeroTitle, 200);
+    }, 1250);
   });
 })();
 
-// Hero photo follows the cursor slightly: the photo's base layout position
-// never moves (its centering transform on .hero-photo-center is untouched),
-// but the inner crop layer drifts a few px toward the cursor — no tilt, no
-// scale change, just a small "follow" nudge from its resting place, eased
-// toward the target each frame.
-(() => {
-  const wrap = document.querySelector('.hero-photo-center');
-  const crop = document.querySelector('.photo-crop');
-  const heroSection = document.querySelector('.hero');
-  if (!wrap || !crop || !heroSection) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return; // skip on touch
+// Hero headline: splits into one <span class="char"> per letter (keeping
+// <em> and <br> intact) and reveals them in sequence with a brief lime
+// glitch-flash before each character settles to its final color. Characters
+// are grouped per word in a nowrap wrapper so a line only ever breaks
+// between words, never mid-letter.
+function typeHeroTitle() {
+  const h1 = document.getElementById('heroTitle');
+  if (!h1 || h1.dataset.typed) return;
+  h1.dataset.typed = 'true';
 
-  let targetTX = 0, targetTY = 0;
-  let curTX = 0, curTY = 0;
-  let rafId = null;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    h1.classList.add('is-typed');
+    return;
+  }
 
-  const tick = () => {
-    curTX += (targetTX - curTX) * 0.12;
-    curTY += (targetTY - curTY) * 0.12;
-    crop.style.transform = `translate(${curTX.toFixed(2)}px, ${curTY.toFixed(2)}px)`;
-    const settled = Math.abs(targetTX - curTX) < 0.05 && Math.abs(targetTY - curTY) < 0.05;
-    rafId = settled ? null : requestAnimationFrame(tick);
+  const makeChar = (ch) => {
+    const span = document.createElement('span');
+    span.className = 'char';
+    span.textContent = ch;
+    return span;
   };
 
-  const kick = () => { if (!rafId) rafId = requestAnimationFrame(tick); };
+  const walk = (node) => {
+    [...node.childNodes].forEach(child => {
+      if (child.nodeType === Node.TEXT_NODE) {
+        const frag = document.createDocumentFragment();
+        child.textContent.split(/(\s+)/).forEach(piece => {
+          if (piece === '') return;
+          if (/^\s+$/.test(piece)) {
+            frag.appendChild(document.createTextNode(piece));
+          } else {
+            const word = document.createElement('span');
+            word.className = 'char-word';
+            [...piece].forEach(ch => word.appendChild(makeChar(ch)));
+            frag.appendChild(word);
+          }
+        });
+        child.replaceWith(frag);
+      } else if (child.nodeType === Node.ELEMENT_NODE && child.tagName !== 'BR') {
+        walk(child);
+      }
+    });
+  };
+  walk(h1);
 
-  heroSection.addEventListener('mousemove', (e) => {
-    const rect = wrap.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const dx = Math.max(-1, Math.min(1, (e.clientX - cx) / (rect.width * 1.6)));
-    const dy = Math.max(-1, Math.min(1, (e.clientY - cy) / (rect.height * 1.6)));
-    targetTX = dx * 14;    // small drift toward the cursor — a "follow", not a real move
-    targetTY = dy * 14;
-    kick();
-  });
+  const chars = h1.querySelectorAll('.char');
+  const stagger = 26; // ms between characters
+  chars.forEach((span, i) => { span.style.transitionDelay = (i * stagger) + 'ms'; });
 
-  heroSection.addEventListener('mouseleave', () => {
-    targetTX = 0; targetTY = 0;
-    kick();
-  });
-})();
+  h1.classList.add('is-typing');
+  setTimeout(() => h1.classList.add('is-typed'), 20);
 
-// Shorts: hover (or focus) a card to load a muted, looping preview inline;
-// click (or Enter/Space) opens a lightbox with sound so the full clip plays
-// without leaving the page.
+  const totalMs = chars.length * stagger + 420;
+  setTimeout(() => h1.classList.remove('is-typing'), totalMs);
+}
+
+// Reels carousel: auto-scrolls slowly via native scrollLeft, can also be
+// dragged/scrubbed directly or skipped with the prev/next buttons.
 (() => {
-  const shortCards = document.querySelectorAll('.short-card[data-video-id]');
-  if (!shortCards.length) return;
+  const track = document.getElementById('reelsTrack');
+  const carousel = document.querySelector('.reels-carousel');
+  if (!track || !carousel) return;
 
-  const lightbox = document.getElementById('videoLightbox');
-  const lightboxFrame = document.getElementById('videoLightboxFrame');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const halfWidth = () => track.scrollWidth / 2;
+  const wrap = () => {
+    if (track.scrollLeft >= halfWidth()) track.scrollLeft -= halfWidth();
+    else if (track.scrollLeft <= 0) track.scrollLeft += halfWidth();
+  };
 
-  const previewSrc = (id) =>
-    `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&modestbranding=1&playsinline=1&rel=0`;
-  const watchSrc = (id) =>
-    `https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&rel=0`;
+  // Eased velocity instead of a hard on/off switch, so hovering, dragging or
+  // resuming glides to a stop/start rather than snapping.
+  const CRUISE_SPEED = 0.6;
+  let velocity = 0;
+  let targetVelocity = CRUISE_SPEED;
+  let resumeTimer = null;
+  const pauseAuto = () => { targetVelocity = 0; clearTimeout(resumeTimer); };
+  const scheduleResume = (delay = 1200) => {
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => { targetVelocity = CRUISE_SPEED; }, delay);
+  };
 
-  shortCards.forEach(card => {
-    const id = card.dataset.videoId;
-    const thumb = card.querySelector('.short-thumb');
-    let preview = null;
-    let hoverTimer = null;
+  if (!reduceMotion) {
+    setInterval(() => {
+      velocity += (targetVelocity - velocity) * 0.08;
+      if (Math.abs(velocity) > 0.01) {
+        track.scrollLeft += velocity;
+        wrap();
+      }
+    }, 16);
+  }
 
-    const startPreview = () => {
-      hoverTimer = setTimeout(() => {
-        if (preview || !thumb) return;
-        preview = document.createElement('iframe');
-        preview.src = previewSrc(id);
-        preview.allow = 'autoplay; encrypted-media';
-        preview.title = 'Preview';
-        thumb.appendChild(preview);
-      }, 220); // short delay so a quick mouse pass-by doesn't spawn an iframe
-    };
-    const stopPreview = () => {
-      clearTimeout(hoverTimer);
-      if (preview) { preview.remove(); preview = null; }
-    };
+  carousel.addEventListener('mouseenter', pauseAuto);
+  carousel.addEventListener('mouseleave', () => scheduleResume(400));
+  carousel.addEventListener('focusin', pauseAuto);
+  carousel.addEventListener('focusout', () => scheduleResume(400));
 
-    card.addEventListener('mouseenter', startPreview);
-    card.addEventListener('mouseleave', stopPreview);
-    card.addEventListener('focus', startPreview);
-    card.addEventListener('blur', stopPreview);
-
-    const openLightbox = () => {
-      if (!lightbox || !lightboxFrame) return;
-      stopPreview();
-      lightboxFrame.innerHTML = '';
-      const player = document.createElement('iframe');
-      player.src = watchSrc(id);
-      player.allow = 'autoplay; encrypted-media; fullscreen';
-      player.allowFullscreen = true;
-      player.title = 'Video player';
-      lightboxFrame.appendChild(player);
-      lightbox.classList.add('is-open');
-      lightbox.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('lightbox-open');
-    };
-
-    card.addEventListener('click', openLightbox);
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(); }
+  carousel.querySelectorAll('.reels-nav').forEach(btn => {
+    btn.addEventListener('click', () => {
+      pauseAuto();
+      const dir = btn.classList.contains('prev') ? -1 : 1;
+      track.scrollLeft += dir * (track.clientWidth * 0.6);
+      wrap();
+      scheduleResume(2200);
     });
   });
 
-  const closeLightbox = () => {
-    if (!lightbox || !lightboxFrame) return;
-    lightbox.classList.remove('is-open');
-    lightbox.setAttribute('aria-hidden', 'true');
-    lightboxFrame.innerHTML = ''; // clearing the src stops playback
-    document.body.classList.remove('lightbox-open');
-  };
-
-  lightbox?.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', closeLightbox));
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightbox?.classList.contains('is-open')) closeLightbox();
+  let isDown = false, dragged = false, startX = 0, startScroll = 0;
+  track.addEventListener('mousedown', (e) => {
+    isDown = true; dragged = false;
+    startX = e.pageX;
+    startScroll = track.scrollLeft;
+    track.classList.add('is-dragging');
+    pauseAuto();
   });
+  window.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    const dx = e.pageX - startX;
+    if (Math.abs(dx) > 4) dragged = true;
+    track.scrollLeft = startScroll - dx;
+    wrap();
+  });
+  window.addEventListener('mouseup', () => {
+    if (!isDown) return;
+    isDown = false;
+    track.classList.remove('is-dragging');
+    scheduleResume(1000);
+  });
+  track.addEventListener('click', (e) => {
+    if (dragged) { e.preventDefault(); e.stopPropagation(); dragged = false; }
+  }, true);
 })();
 
+// Mobile menu toggle
 const menuBtn = document.querySelector('.menu-btn');
-const nav = document.querySelector('.nav nav');
-
-if (menuBtn) {
+const navLinks = document.querySelector('.nav-links');
+if (menuBtn && navLinks) {
   menuBtn.addEventListener('click', () => {
-    nav.classList.toggle('open');
+    navLinks.classList.toggle('open');
     menuBtn.classList.toggle('open');
   });
 }
 
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', e => {
-    const target = document.querySelector(link.getAttribute('href'));
-    if (!target) return;
-    e.preventDefault();
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    nav?.classList.remove('open');
-  });
-});
-
-const ring = document.querySelector('.cursor-ring');
-const dot = document.querySelector('.cursor-dot');
-
-window.addEventListener('mousemove', e => {
-  if (!ring || !dot) return;
-  dot.style.left = `${e.clientX}px`;
-  dot.style.top = `${e.clientY}px`;
-  ring.style.left = `${e.clientX}px`;
-  ring.style.top = `${e.clientY}px`;
-});
-
-document.querySelectorAll('a, button').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    if (!ring) return;
-    ring.style.width = '44px';
-    ring.style.height = '44px';
-    ring.style.borderColor = '#ffc900';
-    ring.style.background = 'rgba(255,201,0,.15)';
-  });
-  el.addEventListener('mouseleave', () => {
-    if (!ring) return;
-    ring.style.width = '28px';
-    ring.style.height = '28px';
-    ring.style.borderColor = 'rgba(17,17,17,.4)';
-    ring.style.background = 'transparent';
-  });
-});
-
-const revealItems = document.querySelectorAll('.section, .stat, .project-card, .capability, .timeline-item, .quotes blockquote, .featured-quote, .edu-grid > div, .system-step, .teaser-card');
+// Scroll-reveal for sections/cards
+const revealItems = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -222,13 +180,7 @@ const observer = new IntersectionObserver(entries => {
     }
   });
 }, { threshold: 0.12 });
-
 revealItems.forEach(el => observer.observe(el));
 
-// Safety net: if a browser never fires the observer for some reason (older
-// browser, reduced-motion setup, etc.), don't leave content permanently
-// invisible — reveal everything after a short delay regardless.
-setTimeout(() => revealItems.forEach(el => el.classList.add('in-view')), 2500);
-
-// Replace this text if you add your own analytics.
-console.log('John Lexus Portfolio V3 loaded.');
+// Safety net in case the observer never fires
+setTimeout(() => revealItems.forEach(el => el.classList.add('in-view')), 2000);

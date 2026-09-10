@@ -3,75 +3,278 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="John Lexus Hinolan: Creative Producer & Creative Media Specialist. Production, editing, content strategy, creative operations and AI-powered workflows." />
-  <title>John Lexus · Creative Producer</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2216%22 fill=%22%23ffc900%22/><text x=%2250%22 y=%2268%22 font-family=%22Arial,sans-serif%22 font-weight=%22800%22 font-size=%2254%22 text-anchor=%22middle%22 fill=%22%23111111%22>J</text></svg>">
+  <meta name="description" content="John Lexus Hinolan — Creative Media Specialist: editing, motion and AI-assisted production workflows." />
+  <title>John Lexus Hinolan · Creative Media Specialist</title>
+  <link rel="icon" href="assets/jl-monogram.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=74" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=15" />
 </head>
 <body class="loading">
   <div class="preloader" aria-hidden="true">
-    <div class="panel panel-left"></div>
-    <div class="panel panel-right"></div>
+    <div class="preloader-welcome">Welcome</div>
+    <div class="panel panel-left">
+      <span class="glitch-bar" style="top:22%"></span>
+      <span class="glitch-bar" style="top:51%"></span>
+      <span class="glitch-bar" style="top:78%"></span>
+    </div>
+    <div class="panel panel-right">
+      <span class="glitch-bar" style="top:34%"></span>
+      <span class="glitch-bar" style="top:63%"></span>
+      <span class="glitch-bar" style="top:87%"></span>
+    </div>
   </div>
-  <div class="cursor-dot"></div>
-  <div class="cursor-ring"></div>
 
-  <header class="nav nav--minimal">
-    <a class="brand" href="index.html">JL<span>.</span></a>
-    <a class="nav-cta" href="mailto:johnlexus.hinolan@gmail.com">Let's talk <span>↗</span></a>
+  <header class="nav">
+    <a class="brand" href="#top">
+      <img src="assets/jl-monogram.png" alt="JL monogram">
+      <span>JOHN LEXUS</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#stack">Stack</a>
+      <a href="#about">About</a>
+    </nav>
+    <a class="nav-cta" href="#contact">Let's Talk</a>
+    <button class="menu-btn" aria-label="Open menu"><span></span><span></span></button>
   </header>
 
   <main id="top">
-    <section class="hero hero--split">
-      <p class="hero-eyebrow reveal">&#128075; Hey, I'm John Lexus &mdash; I'm a</p>
-      <div class="hero-stage">
-        <span class="behind-line line-solid">Creative Producer</span>
-        <div class="hero-photo-center">
-          <div class="photo-crop">
-            <img class="reveal delay-2" src="assets/hero-cutout.png" alt="John Lexus Hinolan" onerror="this.style.display='none';">
-            <div class="photo-fade" aria-hidden="true"></div>
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div>
+        <span class="hero-kicker hero-reveal">Creative Media Specialist</span>
+        <h1 id="heroTitle">I edit, animate,<br>and build the <em>systems</em><br>behind them.</h1>
+        <p class="hero-reveal">Long-form to short-form, motion graphics to AI-assisted workflows — I handle the craft and the process behind it, so the work doesn't just look good once, it holds up every time.</p>
+        <div class="hero-ctas hero-reveal">
+          <a class="btn btn-primary" href="#work">See The Work</a>
+          <a class="btn btn-ghost" href="mailto:johnlexus.hinolan@gmail.com">Get In Touch</a>
+        </div>
+      </div>
+      <div class="hero-photo hero-reveal">
+        <img src="assets/hero-portrait.jpg" alt="Portrait of John Lexus Hinolan">
+      </div>
+    </section>
+
+    <!-- ================= CAPABILITIES (2 pillars) ================= -->
+    <section class="capabilities">
+      <div class="capability-grid">
+        <div class="capability reveal">
+          <span class="capability-num">01</span>
+          <h3>Edit</h3>
+          <p>Long-form interviews, short-form cuts, motion graphics and audio cleanup — one specialist across every format, not a hand-off between three.</p>
+        </div>
+        <div class="capability reveal">
+          <span class="capability-num">02</span>
+          <h3>Build</h3>
+          <p>AI-assisted production workflows, SOPs and content systems that make the next edit faster than the last one, not reinvented from scratch.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STACK (moved up — strongest proof) ================= -->
+    <section id="stack" class="section stack">
+      <div class="section-head reveal">
+        <div class="section-label">The Stack</div>
+        <p>Full editing, AI and production toolkit — used daily, not name-dropped.</p>
+      </div>
+      <div class="stack-grid">
+        <div class="stack-col reveal">
+          <span>Editing</span>
+          <p>Premiere Pro <b>Expert</b><br>After Effects <b>Advanced</b><br>Photoshop <b>Advanced</b><br>DaVinci Resolve<br>CapCut <b>Advanced</b></p>
+        </div>
+        <div class="stack-col reveal">
+          <span>AI</span>
+          <p>Claude <b>Expert</b><br>ChatGPT <b>Expert</b><br>Gemini <b>Expert</b><br>Perplexity <b>Expert</b></p>
+        </div>
+        <div class="stack-col reveal">
+          <span>Production</span>
+          <p>Riverside <b>Advanced</b><br>Notion <b>Advanced</b><br>Maya<br>Airtable</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SELECTED WORK (TCG leads) ================= -->
+    <section id="work" class="section" style="padding-bottom:0">
+      <div class="section-head reveal">
+        <div class="section-label">Selected Work</div>
+        <p>Motion, systems and long-form — led by the problem, not the format.</p>
+      </div>
+      <div class="work-list">
+        <article class="work-item reveal">
+          <a class="work-media" href="https://youtube.com/shorts/pYKqbEb-c9w" target="_blank" rel="noopener" aria-label="Watch Interstellar TCG card-reveal system">
+            <img src="https://i.ytimg.com/vi/pYKqbEb-c9w/hqdefault.jpg" alt="Interstellar TCG motion graphics" loading="lazy">
+            <span class="play">WATCH ↗</span>
+          </a>
+          <div>
+            <span class="work-kicker">01 / Motion &amp; AI-Adjacent Systems</span>
+            <h3>Interstellar TCG</h3>
+            <p>Given only static card illustrations — no footage, no 3D assets, no shoot — I built a repeatable card-reveal system in After Effects: parallax depth, particle FX and dynamic lighting, turning flat art into hype-reel motion content.</p>
+            <a class="work-link" href="https://youtube.com/shorts/pYKqbEb-c9w" target="_blank" rel="noopener">Watch the reveal ↗</a>
           </div>
-          <nav class="hero-menu" aria-label="Explore sections">
-            <a class="hero-menu-item is-solid" href="videos.html">Videos</a>
-            <a class="hero-menu-item" href="graphics.html">Graphics</a>
-            <a class="hero-menu-item" href="ai-workflows.html">AI Workflows</a>
-          </nav>
-        </div>
-        <span class="behind-line line-outline">&amp; Video Editor</span>
+        </article>
       </div>
-      <div class="hero-info-row reveal delay-3">
-        <p class="hero-location">Freelance &middot; Philippines / Remote</p>
-        <div class="hero-logos">
-          <span>The VA Group</span>
-          <span>Marked</span>
-          <span>Sunstar Bacolod</span>
-          <span>Interstellar TCG</span>
-          <span>Smile and Hire</span>
+
+      <!-- Reels — sits directly under Interstellar TCG, above Marked -->
+      <div class="reels-block">
+        <div class="reels-head reveal">
+          <span class="reels-kicker">My Reels</span>
+          <p>This is my reels list — every short-form edit I've made, hooks and all. Drag or use the arrows to look through it.</p>
+        </div>
+        <div class="reels-carousel">
+          <button class="reels-nav prev" aria-label="Previous reel">‹</button>
+          <div class="reels-track" id="reelsTrack">
+            <a class="reel-card reveal" href="https://www.youtube.com/watch?v=ednzV1m-010" target="_blank" rel="noopener" aria-label="Watch Podcast Reel 01"><div class="reel-thumb"><img src="https://i.ytimg.com/vi/ednzV1m-010/hqdefault.jpg" loading="lazy" alt="Podcast reel 01"><span class="reel-play"></span></div></a>
+            <a class="reel-card reveal" href="https://www.youtube.com/watch?v=Cn1V1Gb-zlE" target="_blank" rel="noopener" aria-label="Watch Podcast Reel 02"><div class="reel-thumb"><img src="https://i.ytimg.com/vi/Cn1V1Gb-zlE/hqdefault.jpg" loading="lazy" alt="Podcast reel 02"><span class="reel-play"></span></div></a>
+            <a class="reel-card reveal" href="https://www.youtube.com/watch?v=dbgZn3aEW8g" target="_blank" rel="noopener" aria-label="Watch Podcast Reel 03"><div class="reel-thumb"><img src="https://i.ytimg.com/vi/dbgZn3aEW8g/hqdefault.jpg" loading="lazy" alt="Podcast reel 03"><span class="reel-play"></span></div></a>
+            <a class="reel-card reveal" href="https://www.youtube.com/watch?v=K2uBYhinFJM" target="_blank" rel="noopener" aria-label="Watch Podcast Reel 04"><div class="reel-thumb"><img src="https://i.ytimg.com/vi/K2uBYhinFJM/hqdefault.jpg" loading="lazy" alt="Podcast reel 04"><span class="reel-play"></span></div></a>
+            <a class="reel-card reveal" href="https://www.youtube.com/watch?v=-oUt7wIwuDE" target="_blank" rel="noopener" aria-label="Watch Podcast Reel 05"><div class="reel-thumb"><img src="https://i.ytimg.com/vi/-oUt7wIwuDE/hqdefault.jpg" loading="lazy" alt="Podcast reel 05"><span class="reel-play"></span></div></a>
+            <a class="reel-card reveal" href="https://www.youtube.com/watch?v=nMnubRPwUP8" target="_blank" rel="noopener" aria-label="Watch Podcast Reel 06"><div class="reel-thumb"><img src="https://i.ytimg.com/vi/nMnubRPwUP8/hqdefault.jpg" loading="lazy" alt="Podcast reel 06"><span class="reel-play"></span></div></a>
+            <a class="reel-card reveal" href="https://www.youtube.com/watch?v=w44wM6EeUvM" target="_blank" rel="noopener" aria-label="Watch SaaS edit for Smile and Hire"><div class="reel-thumb"><img src="https://i.ytimg.com/vi/w44wM6EeUvM/hqdefault.jpg" loading="lazy" alt="SaaS edit for Smile and Hire"><span class="reel-play"></span></div></a>
+            <a class="reel-card reveal" href="https://www.youtube.com/watch?v=fHnBIGcaCIM" target="_blank" rel="noopener" aria-label="Watch SaaS edit for Smile and Hire"><div class="reel-thumb"><img src="https://i.ytimg.com/vi/fHnBIGcaCIM/hqdefault.jpg" loading="lazy" alt="SaaS edit for Smile and Hire"><span class="reel-play"></span></div></a>
+            <a class="reel-card reveal" href="https://www.youtube.com/watch?v=5AvRnCEVYPs" target="_blank" rel="noopener" aria-label="Watch Interstellar TCG surviving footage"><div class="reel-thumb"><img src="https://i.ytimg.com/vi/5AvRnCEVYPs/hqdefault.jpg" loading="lazy" alt="Interstellar TCG surviving footage"><span class="reel-play"></span></div></a>
+            <a class="reel-card reveal" href="https://www.youtube.com/watch?v=3jNz-OhrSbI" target="_blank" rel="noopener" aria-label="Watch Interstellar TCG surviving footage"><div class="reel-thumb"><img src="https://i.ytimg.com/vi/3jNz-OhrSbI/hqdefault.jpg" loading="lazy" alt="Interstellar TCG surviving footage"><span class="reel-play"></span></div></a>
+            <a class="reel-card reveal" href="https://www.youtube.com/watch?v=ednzV1m-010" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><div class="reel-thumb"><img src="https://i.ytimg.com/vi/ednzV1m-010/hqdefault.jpg" loading="lazy" alt=""><span class="reel-play"></span></div></a>
+            <a class="reel-card reveal" href="https://www.youtube.com/watch?v=Cn1V1Gb-zlE" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><div class="reel-thumb"><img src="https://i.ytimg.com/vi/Cn1V1Gb-zlE/hqdefault.jpg" loading="lazy" alt=""><span class="reel-play"></span></div></a>
+            <a class="reel-card reveal" href="https://www.youtube.com/watch?v=dbgZn3aEW8g" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><div class="reel-thumb"><img src="https://i.ytimg.com/vi/dbgZn3aEW8g/hqdefault.jpg" loading="lazy" alt=""><span class="reel-play"></span></div></a>
+            <a class="reel-card reveal" href="https://www.youtube.com/watch?v=K2uBYhinFJM" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><div class="reel-thumb"><img src="https://i.ytimg.com/vi/K2uBYhinFJM/hqdefault.jpg" loading="lazy" alt=""><span class="reel-play"></span></div></a>
+            <a class="reel-card reveal" href="https://www.youtube.com/watch?v=-oUt7wIwuDE" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><div class="reel-thumb"><img src="https://i.ytimg.com/vi/-oUt7wIwuDE/hqdefault.jpg" loading="lazy" alt=""><span class="reel-play"></span></div></a>
+            <a class="reel-card reveal" href="https://www.youtube.com/watch?v=nMnubRPwUP8" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><div class="reel-thumb"><img src="https://i.ytimg.com/vi/nMnubRPwUP8/hqdefault.jpg" loading="lazy" alt=""><span class="reel-play"></span></div></a>
+            <a class="reel-card reveal" href="https://www.youtube.com/watch?v=w44wM6EeUvM" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><div class="reel-thumb"><img src="https://i.ytimg.com/vi/w44wM6EeUvM/hqdefault.jpg" loading="lazy" alt=""><span class="reel-play"></span></div></a>
+            <a class="reel-card reveal" href="https://www.youtube.com/watch?v=fHnBIGcaCIM" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><div class="reel-thumb"><img src="https://i.ytimg.com/vi/fHnBIGcaCIM/hqdefault.jpg" loading="lazy" alt=""><span class="reel-play"></span></div></a>
+            <a class="reel-card reveal" href="https://www.youtube.com/watch?v=5AvRnCEVYPs" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><div class="reel-thumb"><img src="https://i.ytimg.com/vi/5AvRnCEVYPs/hqdefault.jpg" loading="lazy" alt=""><span class="reel-play"></span></div></a>
+            <a class="reel-card reveal" href="https://www.youtube.com/watch?v=3jNz-OhrSbI" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><div class="reel-thumb"><img src="https://i.ytimg.com/vi/3jNz-OhrSbI/hqdefault.jpg" loading="lazy" alt=""><span class="reel-play"></span></div></a>
+          </div>
+          <button class="reels-nav next" aria-label="Next reel">›</button>
         </div>
       </div>
-      <div class="hero-marquee" aria-label="Track record">
-        <div class="marquee-track">
-          <span class="marquee-item"><strong>200K+</strong> Organic Views</span>
-          <span class="marquee-item"><strong>153</strong> Podcast Episodes</span>
-          <span class="marquee-item"><strong>1K+</strong> Short-Form Videos</span>
-          <span class="marquee-item"><strong>4</strong> Team Members Led</span>
-          <span class="marquee-item"><strong>200K+</strong> Organic Views</span>
-          <span class="marquee-item"><strong>153</strong> Podcast Episodes</span>
-          <span class="marquee-item"><strong>1K+</strong> Short-Form Videos</span>
-          <span class="marquee-item"><strong>4</strong> Team Members Led</span>
+
+      <div class="work-list">
+        <article class="work-item work-item--stacked reveal">
+          <div class="work-title-row reveal">
+            <span class="work-kicker">02 / Production &amp; Growth</span>
+            <h3>Marked</h3>
+          </div>
+          <div class="work-media-wrap">
+            <div class="work-media-trio">
+              <a href="https://youtu.be/Zvvnj57a_ZQ" target="_blank" rel="noopener" aria-label="Watch Marked episode"><img src="https://i.ytimg.com/vi/Zvvnj57a_ZQ/maxresdefault.jpg" alt="Marked podcast episode" loading="lazy"></a>
+              <a href="https://youtu.be/v7PIvadAe2U" target="_blank" rel="noopener" aria-label="Watch a Formerly The 1% Podcast episode"><img src="https://i.ytimg.com/vi/v7PIvadAe2U/maxresdefault.jpg" alt="Formerly The 1% Podcast episode" loading="lazy"></a>
+              <a href="https://youtu.be/ICEagqWbV18" target="_blank" rel="noopener" aria-label="Watch another Marked episode"><img src="https://i.ytimg.com/vi/ICEagqWbV18/maxresdefault.jpg" alt="Marked podcast episode" loading="lazy"></a>
+            </div>
+          </div>
+          <div class="work-copy-bottom reveal">
+            <p>Formerly The 1% Podcast. Edited for Vin Infante for three years, growing the show past 200,000 organic views (vidIQ-verified) before stepping up from editor to full producer as it rebranded to Marked.</p>
+            <a class="work-link" href="https://www.youtube.com/channel/UCNMEh8UGjpuQtQQOKIIxBnw/" target="_blank" rel="noopener">View channel ↗</a>
+          </div>
+        </article>
+
+        <article class="work-item work-item--stacked reveal">
+          <div class="work-title-row reveal">
+            <span class="work-kicker">03 / Documentary, Under Deadline</span>
+            <h3>Emotional Monster</h3>
+          </div>
+          <div class="work-media-wrap">
+            <a class="work-media" href="https://youtu.be/O-eSHwVXGOw" target="_blank" rel="noopener" aria-label="Watch Emotional Monster documentary">
+              <img src="https://i.ytimg.com/vi/O-eSHwVXGOw/maxresdefault.jpg" alt="Emotional Monster documentary" loading="lazy">
+              <span class="play">WATCH ↗</span>
+            </a>
+          </div>
+          <div class="work-copy-bottom reveal">
+            <p>Edited a Sunstar Bacolod mental-health documentary during live COVID-19 newsroom operations. Won Explanatory/Investigative Video Story of the Year (Visayas), Globe Media Excellence Awards 2020.</p>
+            <a class="work-link" href="https://www.sunstar.com.ph/bacolod/local-news/sunstar-bacolod-journo-wins-3-gmea-awards-6-finalist-citations" target="_blank" rel="noopener">Verify award ↗</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= PROOF STATS ================= -->
+    <section class="stats">
+      <div class="stats-grid">
+        <div class="stat reveal">
+          <strong>200K+</strong>
+          <span>Organic Views</span>
         </div>
+        <div class="stat reveal">
+          <strong>1K+</strong>
+          <span>Short-Form Videos Edited</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TESTIMONIALS ================= -->
+    <section id="about" class="section">
+      <div class="section-head reveal">
+        <div class="section-label">What People Say About My Work</div>
+        <p>What people said after working together.</p>
+      </div>
+
+      <div class="testimonials-row">
+        <blockquote class="featured-quote reveal">
+          <span>&ldquo;</span>
+          <p>From the very beginning, John has been incredibly kind, thoughtful, and attentive to my vision. He has a real gift for taking any idea in my head and bringing it to life through posts and reels that capture exactly the tone, design, and aesthetic I&rsquo;m looking for.</p>
+          <p>One of the marketing materials he helped create was a huge success and brought incredible new faces into my business.</p>
+          <cite>Ami Park</cite>
+        </blockquote>
+        <div class="quote-secondary reveal">
+          <p>&ldquo;John consistently demonstrated a high level of dedication, reliability and the ability to perform his duties efficiently. His commitment to excellence and ability to adapt to changes quickly made him an indispensable asset to our team.&rdquo;</p>
+          <cite>Razelyn Bisnar, CIO &mdash; The VA Group, LLC (Letter of Recommendation)</cite>
+        </div>
+        <div class="quote-secondary quote-secondary--placeholder reveal">
+          <p>&mdash; Testimonial coming soon &mdash;</p>
+          <cite>Vincent Infante</cite>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= THE WINS (separate section, under testimonials) ================= -->
+    <section class="section wins">
+      <div class="section-head reveal">
+        <div class="section-label">The Wins</div>
+        <p>The achievements, verified.</p>
+      </div>
+      <div class="wins-grid">
+        <div class="win-card reveal">
+          <img src="assets/win-200k-views.png" alt="vidIQ 200,000 views milestone for The 1% Podcast">
+          <div class="win-card-copy">
+            <span>Growth</span>
+            <p>200,000+ organic views, vidIQ-verified — The 1% Podcast, achieved Apr 9, 2026.</p>
+          </div>
+        </div>
+        <div class="win-card reveal">
+          <img src="assets/win-hof-contest.png" alt="Haul of Fame logo design contest announcement naming John Lexus Hinolan the winner">
+          <div class="win-card-copy">
+            <span>Design</span>
+            <p>Won the company-wide logo design contest for Haul of Fame.</p>
+          </div>
+        </div>
+        <div class="win-card win-card--text reveal">
+          <div class="win-card-copy" style="padding:0">
+            <span>Award</span>
+            <p>Globe Media Excellence Awards 2020 &mdash; Explanatory/Investigative Video Story of the Year (Visayas), for <em style="color:var(--ink);font-style:normal">Emotional Monster</em>.<br><br>Won &mdash; Pintas Figuras (Body Painting), La Consolacion College Bacolod.<br><br><a href="https://www.sunstar.com.ph/bacolod/local-news/sunstar-bacolod-journo-wins-3-gmea-awards-6-finalist-citations" target="_blank" rel="noopener">Verify GMEA award ↗</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact" class="contact">
+      <p class="kicker reveal">Get In Touch</p>
+      <h2 class="reveal">Let's build the<br><em>next</em> one.</h2>
+      <div class="contact-links reveal">
+        <a href="mailto:johnlexus.hinolan@gmail.com">johnlexus.hinolan@gmail.com ↗</a>
+        <a href="https://www.linkedin.com/in/john-lexus-hinolan-a8b722215/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="https://www.upwork.com/freelancers/~0104ec5929a8d7fd9d?mp_source=share" target="_blank" rel="noopener">Upwork ↗</a>
+        <span>Philippines / Remote</span>
       </div>
     </section>
   </main>
 
   <footer>
-    <span>JOHN LEXUS HINOLAN</span>
-    <span>CREATIVE PRODUCER / 2026</span>
+    <span>John Lexus Hinolan</span>
+    <span>Creative Media Specialist / 2026</span>
   </footer>
 
-  <script src="script.js?v=17"></script>
+  <script src="script.js?v=5"></script>
 </body>
 </html>
