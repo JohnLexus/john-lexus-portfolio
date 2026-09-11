@@ -99,7 +99,7 @@ function typeHeroTitle() {
 
   // Eased velocity instead of a hard on/off switch, so hovering, dragging or
   // resuming glides to a stop/start rather than snapping.
-  const CRUISE_SPEED = 0.6;
+  const CRUISE_SPEED = 1.1;
   let velocity = 0;
   let targetVelocity = CRUISE_SPEED;
   let resumeTimer = null;
@@ -158,6 +158,13 @@ function typeHeroTitle() {
   track.addEventListener('click', (e) => {
     if (dragged) { e.preventDefault(); e.stopPropagation(); dragged = false; }
   }, true);
+
+  // Touch devices never fire mouseenter/mouseleave, so without this the
+  // carousel would auto-scroll under a finger drag and then never resume
+  // once the user lets go. Pause on touch, resume shortly after release.
+  track.addEventListener('touchstart', pauseAuto, { passive: true });
+  track.addEventListener('touchend', () => scheduleResume(600), { passive: true });
+  track.addEventListener('touchcancel', () => scheduleResume(600), { passive: true });
 })();
 
 // Mobile menu toggle
