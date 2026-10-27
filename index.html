@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=25" />
-  <link rel="stylesheet" href="menu.css?v=1" />
+  <link rel="stylesheet" href="menu.css?v=2" />
 </head>
 <body class="loading">
   <div class="preloader" aria-hidden="true">
@@ -64,13 +64,14 @@
       </div>
     </div>
     <nav class="mrow" aria-label="Sections">
-      <span class="mlink-mask"><a class="mlink" href="#work">Work</a></span>
-      <span class="mlink-mask"><a class="mlink" href="#stack">Stack</a></span>
-      <span class="mlink-mask"><a class="mlink" href="#hauloffame">Haul of Fame</a></span>
-      <span class="mlink-mask"><a class="mlink" href="#ai-workflows">AI Workflows</a></span>
-      <span class="mlink-mask"><a class="mlink" href="#analytics">Analytics</a></span>
-      <span class="mlink-mask"><a class="mlink" href="#about">Testimonials</a></span>
-      <span class="mlink-mask"><a class="mlink" href="#contact">Contact</a></span>
+      <span class="mlink-mask"><a class="mlink" href="#file-work">Work</a></span>
+      <span class="mlink-mask"><a class="mlink" href="#file-stack">Stack</a></span>
+      <span class="mlink-mask"><a class="mlink" href="#file-hauloffame">Haul of Fame</a></span>
+      <span class="mlink-mask"><a class="mlink" href="#file-ai-workflows">AI Workflows</a></span>
+      <span class="mlink-mask"><a class="mlink" href="#file-analytics">Analytics</a></span>
+      <span class="mlink-mask"><a class="mlink" href="#file-testimonials">Testimonials</a></span>
+      <span class="mlink-mask"><a class="mlink" href="#file-wins">Wins</a></span>
+      <span class="mlink-mask"><a class="mlink" href="#file-contact">Contact</a></span>
       <span class="mbar" aria-hidden="true"></span>
     </nav>
   </div>
@@ -83,7 +84,7 @@
         <h1 id="heroTitle">I edit, animate,<br>and build the <em>systems</em><br>behind them.</h1>
         <p class="hero-reveal">Long-form to short-form, motion graphics to AI-assisted workflows. I handle the craft and the process behind it, so the work doesn't just look good once, it holds up every time.</p>
         <div class="hero-ctas hero-reveal">
-          <a class="btn btn-primary" href="#work">See The Work</a>
+          <a class="btn btn-primary" href="#file-work">See The Work</a>
           <a class="btn btn-ghost" href="mailto:johnlexus.hinolan@gmail.com">Get In Touch</a>
         </div>
       </div>
@@ -91,46 +92,26 @@
         <img src="assets/hero-portrait.jpg" alt="Portrait of John Lexus Hinolan">
       </div>
     </section>
+  </main>
 
-    <!-- ================= CAPABILITIES (2 pillars) ================= -->
-    <section class="capabilities">
-      <div class="capability-grid">
-        <div class="capability reveal">
-          <span class="capability-num">01</span>
-          <h3>Edit</h3>
-          <p>Long-form interviews, short-form cuts, motion graphics and audio cleanup. One specialist across every format, not a hand-off between three.</p>
+  <!-- ================= FILES (popups opened from the menu) ================= -->
+  <div class="file" id="file-work" role="dialog" aria-modal="true" aria-labelledby="file-work-t" hidden>
+    <div class="file-window">
+      <div class="file-bar"><span id="file-work-t">01 / Work</span><button class="file-close" type="button" aria-label="Close file">Close &times;</button></div>
+      <div class="file-body">
+    <section class="stats">
+      <div class="stats-grid">
+        <div class="stat reveal">
+          <strong>200K+</strong>
+          <span>Organic Views</span>
         </div>
-        <div class="capability reveal">
-          <span class="capability-num">02</span>
-          <h3>Build</h3>
-          <p>AI-assisted production workflows, SOPs and content systems that make the next edit faster than the last one, not reinvented from scratch.</p>
+        <div class="stat reveal">
+          <strong>1K+</strong>
+          <span>Short-Form Videos Edited</span>
         </div>
       </div>
     </section>
 
-    <!-- ================= STACK (moved up — strongest proof) ================= -->
-    <section id="stack" class="section stack">
-      <div class="section-head reveal">
-        <div class="section-label">The Stack</div>
-        <p>Full editing, AI and production toolkit, used daily, not name-dropped.</p>
-      </div>
-      <div class="stack-grid">
-        <div class="stack-col reveal">
-          <span>Editing</span>
-          <p>Premiere Pro <b>Expert</b><br>After Effects <b>Advanced</b><br>Photoshop <b>Advanced</b><br>DaVinci Resolve<br>CapCut <b>Advanced</b></p>
-        </div>
-        <div class="stack-col reveal">
-          <span>AI</span>
-          <p>Claude <b>Expert</b><br>ChatGPT <b>Expert</b><br>Gemini <b>Expert</b><br>Perplexity <b>Expert</b><br>Higgsfield <b>AI Video</b></p>
-        </div>
-        <div class="stack-col reveal">
-          <span>Production</span>
-          <p>Riverside <b>Advanced</b><br>Notion <b>Advanced</b><br>Maya<br>Airtable</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= SELECTED WORK (TCG leads) ================= -->
     <section id="work" class="section" style="padding-bottom:0">
       <div class="section-head reveal">
         <div class="section-label">Selected Work</div>
@@ -222,8 +203,55 @@
         </article>
       </div>
     </section>
+      </div>
+    </div>
+  </div>
+  <div class="file" id="file-stack" role="dialog" aria-modal="true" aria-labelledby="file-stack-t" hidden>
+    <div class="file-window">
+      <div class="file-bar"><span id="file-stack-t">02 / Stack</span><button class="file-close" type="button" aria-label="Close file">Close &times;</button></div>
+      <div class="file-body">
+    <section class="capabilities">
+      <div class="capability-grid">
+        <div class="capability reveal">
+          <span class="capability-num">01</span>
+          <h3>Edit</h3>
+          <p>Long-form interviews, short-form cuts, motion graphics and audio cleanup. One specialist across every format, not a hand-off between three.</p>
+        </div>
+        <div class="capability reveal">
+          <span class="capability-num">02</span>
+          <h3>Build</h3>
+          <p>AI-assisted production workflows, SOPs and content systems that make the next edit faster than the last one, not reinvented from scratch.</p>
+        </div>
+      </div>
+    </section>
 
-    <!-- ================= HAUL OF FAME ================= -->
+    <section id="stack" class="section stack">
+      <div class="section-head reveal">
+        <div class="section-label">The Stack</div>
+        <p>Full editing, AI and production toolkit, used daily, not name-dropped.</p>
+      </div>
+      <div class="stack-grid">
+        <div class="stack-col reveal">
+          <span>Editing</span>
+          <p>Premiere Pro <b>Expert</b><br>After Effects <b>Advanced</b><br>Photoshop <b>Advanced</b><br>DaVinci Resolve<br>CapCut <b>Advanced</b></p>
+        </div>
+        <div class="stack-col reveal">
+          <span>AI</span>
+          <p>Claude <b>Expert</b><br>ChatGPT <b>Expert</b><br>Gemini <b>Expert</b><br>Perplexity <b>Expert</b><br>Higgsfield <b>AI Video</b></p>
+        </div>
+        <div class="stack-col reveal">
+          <span>Production</span>
+          <p>Riverside <b>Advanced</b><br>Notion <b>Advanced</b><br>Maya<br>Airtable</p>
+        </div>
+      </div>
+    </section>
+      </div>
+    </div>
+  </div>
+  <div class="file" id="file-hauloffame" role="dialog" aria-modal="true" aria-labelledby="file-hauloffame-t" hidden>
+    <div class="file-window">
+      <div class="file-bar"><span id="file-hauloffame-t">03 / Haul of Fame</span><button class="file-close" type="button" aria-label="Close file">Close &times;</button></div>
+      <div class="file-body">
     <section id="hauloffame" class="section">
       <div class="section-head reveal">
         <div>
@@ -259,22 +287,13 @@
         </div>
       </div>
     </section>
-
-    <!-- ================= PROOF STATS ================= -->
-    <section class="stats">
-      <div class="stats-grid">
-        <div class="stat reveal">
-          <strong>200K+</strong>
-          <span>Organic Views</span>
-        </div>
-        <div class="stat reveal">
-          <strong>1K+</strong>
-          <span>Short-Form Videos Edited</span>
-        </div>
       </div>
-    </section>
-
-    <!-- ================= AI-ASSISTED WORKFLOWS ================= -->
+    </div>
+  </div>
+  <div class="file" id="file-ai-workflows" role="dialog" aria-modal="true" aria-labelledby="file-ai-workflows-t" hidden>
+    <div class="file-window">
+      <div class="file-bar"><span id="file-ai-workflows-t">04 / AI Workflows</span><button class="file-close" type="button" aria-label="Close file">Close &times;</button></div>
+      <div class="file-body">
     <section id="ai-workflows" class="section">
       <div class="section-head reveal">
         <div class="section-label">AI-Assisted Workflows</div>
@@ -348,8 +367,13 @@
       </div>
       <p class="workflow-cta reveal">These are a few examples of what I can build. If you want something like these, <a href="#contact">let's talk</a>.</p>
     </section>
-
-    <!-- ================= ENGAGEMENT & ANALYTICS ================= -->
+      </div>
+    </div>
+  </div>
+  <div class="file" id="file-analytics" role="dialog" aria-modal="true" aria-labelledby="file-analytics-t" hidden>
+    <div class="file-window">
+      <div class="file-bar"><span id="file-analytics-t">05 / Analytics</span><button class="file-close" type="button" aria-label="Close file">Close &times;</button></div>
+      <div class="file-body">
     <section id="analytics" class="section">
       <div class="section-head reveal">
         <div class="section-label">Engagement &amp; Analytics</div>
@@ -440,8 +464,13 @@
         </article>
       </div>
     </section>
-
-    <!-- ================= TESTIMONIALS ================= -->
+      </div>
+    </div>
+  </div>
+  <div class="file" id="file-testimonials" role="dialog" aria-modal="true" aria-labelledby="file-testimonials-t" hidden>
+    <div class="file-window">
+      <div class="file-bar"><span id="file-testimonials-t">06 / Testimonials</span><button class="file-close" type="button" aria-label="Close file">Close &times;</button></div>
+      <div class="file-body">
     <section id="about" class="section">
       <div class="section-head reveal">
         <div class="section-label">What People Say About My Work</div>
@@ -465,8 +494,13 @@
         </div>
       </div>
     </section>
-
-    <!-- ================= THE WINS (separate section, under analytics) ================= -->
+      </div>
+    </div>
+  </div>
+  <div class="file" id="file-wins" role="dialog" aria-modal="true" aria-labelledby="file-wins-t" hidden>
+    <div class="file-window">
+      <div class="file-bar"><span id="file-wins-t">07 / Wins</span><button class="file-close" type="button" aria-label="Close file">Close &times;</button></div>
+      <div class="file-body">
     <section class="section wins">
       <div class="section-head reveal">
         <div class="section-label">The Wins</div>
@@ -495,8 +529,13 @@
         </div>
       </div>
     </section>
-
-    <!-- ================= CONTACT ================= -->
+      </div>
+    </div>
+  </div>
+  <div class="file" id="file-contact" role="dialog" aria-modal="true" aria-labelledby="file-contact-t" hidden>
+    <div class="file-window">
+      <div class="file-bar"><span id="file-contact-t">08 / Contact</span><button class="file-close" type="button" aria-label="Close file">Close &times;</button></div>
+      <div class="file-body">
     <section id="contact" class="contact">
       <p class="kicker reveal">Get In Touch</p>
       <h2 class="reveal">Let's build the<br><em>next</em> one.</h2>
@@ -507,7 +546,9 @@
         <span>Philippines / Remote</span>
       </div>
     </section>
-  </main>
+      </div>
+    </div>
+  </div>
 
   <footer>
     <span>John Lexus Hinolan</span>
@@ -515,6 +556,7 @@
   </footer>
 
   <script src="script.js?v=7"></script>
-  <script src="menu.js?v=1"></script>
+  <script src="files.js?v=1"></script>
+  <script src="menu.js?v=2"></script>
 </body>
 </html>

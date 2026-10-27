@@ -111,12 +111,11 @@
   toggle.addEventListener('click', () => (state === 'open' ? close() : open()));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 
-  // Links close the menu and jump to their section.
+  // Each word closes the menu and opens its popup file (files.js reads the hash).
   links.forEach((a) => a.addEventListener('click', (e) => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (!target) return;
     e.preventDefault();
-    close(() => target.scrollIntoView({ behavior: 'auto' }));
+    const hash = a.getAttribute('href');
+    close(() => { if (location.hash !== hash) location.hash = hash; });
   }));
   wide.addEventListener('change', () => { if (state === 'open') { rowTarget = rowX = 0; row.style.transform = ''; wide.matches && !reduce.matches ? startLoop() : stopLoop(); } });
 })();

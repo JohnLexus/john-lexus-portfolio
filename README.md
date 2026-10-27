@@ -46,3 +46,12 @@ across production, editing, strategy, systems, leadership and AI.
 2. **`assets/testimonial-shane.png`** — referenced in the Social Proof
    section but not included in the file yet. Drop the actual screenshot in
    `assets/` with that exact filename, or send it and it'll get added.
+
+## Menu + popup files
+
+The Menu chip (top right) is the site's only navigation. Each word in the full-screen menu
+opens its own popup (`#file-work`, `#file-stack`, ...), defined at the bottom of
+`index.html`. Close with the Close button, Esc, a click outside, or the browser Back button.
+Menu: `menu.css` / `menu.js`. Popups: `files.js` (+ the popup section of `menu.css`).
+The earlier redesign (analytics, in-page video lightbox, etc.) lives on branch
+`backup/redesign-2026-10-27`.
