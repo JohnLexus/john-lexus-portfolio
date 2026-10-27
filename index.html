@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=25" />
+  <link rel="stylesheet" href="menu.css?v=1" />
 </head>
 <body class="loading">
   <div class="preloader" aria-hidden="true">
@@ -31,14 +32,48 @@
       <img src="assets/jl-monogram.png" alt="JL monogram">
       <span>JOHN LEXUS</span>
     </a>
-    <nav class="nav-links">
-      <a href="#work">Work</a>
-      <a href="#stack">Stack</a>
-      <a href="#about">About</a>
-    </nav>
-    <a class="nav-cta" href="#contact">Let's Talk</a>
-    <button class="menu-btn" aria-label="Open menu"><span></span><span></span></button>
   </header>
+
+  <button class="mtoggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
+    <span class="mtoggle-clip"><span class="mtoggle-stack"><span>Menu</span><span>Close</span></span></span>
+  </button>
+
+  <div class="mmenu" id="menu" role="dialog" aria-modal="true" aria-label="Site menu">
+    <div class="mphoto"><img src="assets/hero-portrait.jpg" alt=""></div>
+    <div class="mdetails">
+      <div class="mdetails-col">
+        <div class="mdetails-group">
+          <span class="dl"><span>John Lexus Hinolan</span></span>
+          <span class="dl"><span>Podcast Producer</span></span>
+          <span class="dl"><span>Video Editor</span></span>
+          <span class="dl"><span>Creative Media Specialist</span></span>
+        </div>
+        <div class="mdetails-group">
+          <span class="dl"><span>Philippines / Remote</span></span>
+          <span class="dl"><span>Open to roles</span></span>
+        </div>
+      </div>
+      <div class="mdetails-col">
+        <div class="mdetails-group">
+          <span class="dl"><a href="mailto:johnlexus.hinolan@gmail.com">johnlexus.hinolan@gmail.com</a></span>
+        </div>
+        <div class="mdetails-group">
+          <span class="dl"><a href="https://www.linkedin.com/in/john-lexus-hinolan-a8b722215/" target="_blank" rel="noopener">LinkedIn</a></span>
+          <span class="dl"><a href="https://www.upwork.com/freelancers/~0104ec5929a8d7fd9d?mp_source=share" target="_blank" rel="noopener">Upwork</a></span>
+        </div>
+      </div>
+    </div>
+    <nav class="mrow" aria-label="Sections">
+      <span class="mlink-mask"><a class="mlink" href="#work">Work</a></span>
+      <span class="mlink-mask"><a class="mlink" href="#stack">Stack</a></span>
+      <span class="mlink-mask"><a class="mlink" href="#hauloffame">Haul of Fame</a></span>
+      <span class="mlink-mask"><a class="mlink" href="#ai-workflows">AI Workflows</a></span>
+      <span class="mlink-mask"><a class="mlink" href="#analytics">Analytics</a></span>
+      <span class="mlink-mask"><a class="mlink" href="#about">Testimonials</a></span>
+      <span class="mlink-mask"><a class="mlink" href="#contact">Contact</a></span>
+      <span class="mbar" aria-hidden="true"></span>
+    </nav>
+  </div>
 
   <main id="top">
     <!-- ================= HERO ================= -->
@@ -480,5 +515,6 @@
   </footer>
 
   <script src="script.js?v=7"></script>
+  <script src="menu.js?v=1"></script>
 </body>
 </html>
