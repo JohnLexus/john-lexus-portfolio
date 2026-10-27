@@ -50,7 +50,7 @@ across production, editing, strategy, systems, leadership and AI.
 ## Menu + popup files
 
 The Menu chip (top right) is the site's only navigation. Each word in the full-screen menu
-opens its own popup (`#file-work`, `#file-stack`, ...), defined at the bottom of
+opens its own popup (`#file-work`, `#file-process`, ...), defined at the bottom of
 `index.html`. Close with the Close button, Esc, a click outside, or the browser Back button.
 Menu: `menu.css` / `menu.js`. Popups: `files.js` (+ the popup section of `menu.css`).
 The earlier redesign (analytics, in-page video lightbox, etc.) lives on branch
