@@ -191,3 +191,18 @@ revealItems.forEach(el => observer.observe(el));
 
 // Safety net in case the observer never fires
 setTimeout(() => revealItems.forEach(el => el.classList.add('in-view')), 2000);
+
+// Portrait flip: click (or Enter/Space) turns the photo to its back, which
+// shows the full name and title. Click again to flip back.
+(() => {
+  const card = document.getElementById('heroFlip');
+  if (!card) return;
+  const toggle = () => {
+    const on = card.classList.toggle('flipped');
+    card.setAttribute('aria-pressed', String(on));
+  };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+  });
+})();

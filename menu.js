@@ -109,6 +109,7 @@
   };
 
   toggle.addEventListener('click', () => (state === 'open' ? close() : open()));
+  document.querySelectorAll('[data-open-menu]').forEach((b) => b.addEventListener('click', open));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 
   // Each word closes the menu and opens its popup file (files.js reads the hash).

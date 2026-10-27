@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=25" />
+  <link rel="stylesheet" href="styles.css?v=28" />
   <link rel="stylesheet" href="menu.css?v=2" />
 </head>
 <body class="loading">
@@ -80,16 +80,22 @@
     <!-- ================= HERO ================= -->
     <section class="hero">
       <div>
-        <span class="hero-kicker hero-reveal">Creative Media Specialist</span>
-        <h1 id="heroTitle">I edit, animate,<br>and build the <em>systems</em><br>behind them.</h1>
-        <p class="hero-reveal">Long-form to short-form, motion graphics to AI-assisted workflows. I handle the craft and the process behind it, so the work doesn't just look good once, it holds up every time.</p>
+        <p class="hero-line hero-reveal">I edit, animate, and build the <em>systems</em> behind them. I handle the craft and the process across long-form, short-form, motion graphics and AI-assisted workflows, so the work holds up every time.</p>
         <div class="hero-ctas hero-reveal">
-          <a class="btn btn-primary" href="#file-work">See The Work</a>
-          <a class="btn btn-ghost" href="mailto:johnlexus.hinolan@gmail.com">Get In Touch</a>
+          <button class="btn btn-primary" type="button" data-open-menu>Menu</button>
         </div>
       </div>
-      <div class="hero-photo hero-reveal">
-        <img src="assets/hero-portrait.jpg" alt="Portrait of John Lexus Hinolan">
+      <div class="hero-photo hero-reveal" id="heroFlip" role="button" tabindex="0" aria-pressed="false" aria-label="Portrait of John Lexus Hinolan. Click to flip.">
+        <div class="flip-inner">
+          <div class="flip-face flip-front">
+            <img src="assets/hero-portrait.jpg" alt="">
+            <span class="flip-hint" aria-hidden="true">Flip &#8635;</span>
+          </div>
+          <div class="flip-face flip-back">
+            <h2>John Lexus Hinolan</h2>
+            <p><span>Podcast Producer |</span> <span>Video Editor |</span> <span>Creative Media Specialist</span></p>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -555,7 +561,7 @@
     <span>Creative Media Specialist / 2026</span>
   </footer>
 
-  <script src="script.js?v=7"></script>
+  <script src="script.js?v=8"></script>
   <script src="files.js?v=1"></script>
   <script src="menu.js?v=2"></script>
 </body>
