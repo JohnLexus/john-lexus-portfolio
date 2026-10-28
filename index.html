@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=13" />
+  <link rel="stylesheet" href="styles.css?v=14" />
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -32,26 +32,59 @@
 
     <!-- HERO -->
     <section class="hero">
-      <div class="hero-text">
-        <p class="hero-line rise">I edit, animate, and build the <em>systems</em> behind them. I handle the craft and the process across long-form, short-form, motion graphics and AI-assisted workflows, so the work holds up every time.</p>
-        <div class="hero-cta rise">
-          <a class="btn btn-primary" href="mailto:johnlexus.hinolan@gmail.com">Email me</a>
-          <a class="btn btn-ghost" href="assets/John_Lexus_Hinolan_Resume.pdf" target="_blank" rel="noopener">Resume</a>
-        </div>
+      <div class="hero-do rise">
+        <span class="label">What I do</span>
+        <p class="do-lead">I edit, animate, and build the <em>systems</em> behind them.</p>
+        <ul class="do-list">
+          <li>Long-form</li>
+          <li>Short-form</li>
+          <li>Motion graphics</li>
+          <li>AI-assisted workflows</li>
+        </ul>
+        <p class="do-close">I handle the craft and the process, so the work holds up every time.</p>
+        <a class="mini-link" href="mailto:johnlexus.hinolan@gmail.com">Email me &#8599;</a>
       </div>
 
-      <div class="portrait rise" id="portrait" role="button" tabindex="0" aria-pressed="false" aria-label="Portrait of John Lexus Hinolan. Click to flip.">
-        <div class="portrait-inner">
-          <div class="portrait-face portrait-front">
-            <img src="assets/hero-portrait.jpg" alt="">
-            <span class="portrait-hint" aria-hidden="true">Flip &#8635;</span>
-          </div>
-          <div class="portrait-face portrait-back">
-            <h2>John Lexus Hinolan</h2>
-            <p><span>Podcast Producer |</span> <span>Video Editor |</span> <span>Creative Media Specialist</span></p>
+      <div class="id-col rise">
+        <div class="id-swing" id="idSwing">
+          <div class="id-strap" aria-hidden="true"></div>
+          <div class="id-clip" aria-hidden="true"></div>
+          <div class="id-tilt" id="idTilt">
+            <div class="id-card" id="idCard" role="button" tabindex="0" aria-pressed="false" aria-label="John Lexus Hinolan ID card. Click to flip it. Drag to swing it.">
+              <div class="id-face id-front">
+                <span class="id-slot" aria-hidden="true"></span>
+                <div class="id-photo"><img src="assets/hero-portrait.jpg" alt="" draggable="false"></div>
+                <div class="id-info">
+                  <h2>John Lexus Hinolan</h2>
+                  <p><span>Podcast Producer |</span> <span>Video Editor |</span> <span>Creative Media Specialist</span></p>
+                </div>
+              </div>
+              <div class="id-face id-back">
+                <span class="id-slot" aria-hidden="true"></span>
+                <h2>John Lexus Hinolan</h2>
+                <p><span>Podcast Producer |</span> <span>Video Editor |</span> <span>Creative Media Specialist</span></p>
+                <span class="id-rule"></span>
+                <small>Philippines / Remote</small>
+                <small>Open to roles</small>
+                <span class="id-bars" aria-hidden="true"></span>
+              </div>
+            </div>
           </div>
         </div>
+        <p class="id-hint">Click to flip &middot; drag to swing</p>
       </div>
+
+      <aside class="hero-about rise" id="about">
+        <span class="label">About</span>
+        <ul class="about-list">
+          <li>8 years in video, 3+ working remotely</li>
+          <li>Creative Manager, The VA Group (2023&ndash;2026)</li>
+          <li>Producer, Marked with Vin Infante</li>
+          <li>Editor, Sunstar Bacolod (2020), award-winning documentary</li>
+          <li>5.0 rating on Upwork</li>
+        </ul>
+        <a class="mini-link" href="assets/John_Lexus_Hinolan_Resume.pdf" download>See more: download my resume &#8595;</a>
+      </aside>
     </section>
 
     <!-- PROOF STRIP -->
@@ -353,23 +386,6 @@
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="section">
-      <div class="section-head reveal"><span class="label">About</span><h2>Eight years in video</h2></div>
-      <div class="about">
-        <div class="about-copy reveal">
-          <p>I started in 2018 doing freelance and school video work, then edited for the Sunstar Bacolod newsroom in 2020. Since 2023 I have worked remotely, rising from editor to creative manager at The VA Group and producing The 1% Podcast, now Marked.</p>
-          <p>I work across long-form, short-form, motion graphics and AI-assisted workflows, and I build the systems that make the next edit faster than the last.</p>
-        </div>
-        <div class="exp reveal">
-          <div class="exp-row"><span>Feb 2026 &ndash; Present</span><div><h3>Self-Employed</h3><p>Creative Partner. Producer on Marked, plus two more business owners. 5.0 Upwork rating.</p></div></div>
-          <div class="exp-row"><span>Jan 2023 &ndash; Jul 2026</span><div><h3>The VA Group</h3><p>Creative Manager &amp; Creative Media Specialist. Led the top creative team; sole production architect of The 1% Podcast.</p></div></div>
-          <div class="exp-row"><span>Jan &ndash; Aug 2020</span><div><h3>Sunstar Bacolod</h3><p>Video Editor &amp; Graphic Designer in a live COVID-19 newsroom. Edited <em>Emotional Monster</em>, winner of Explanatory/Investigative Video Story of the Year (Visayas), Globe Media Excellence Awards 2020. <a class="inline" href="https://www.sunstar.com.ph/bacolod/local-news/sunstar-bacolod-journo-wins-3-gmea-awards-6-finalist-citations" target="_blank" rel="noopener">Verify&nbsp;&#8599;</a></p></div></div>
-          <div class="exp-row"><span>2018 &ndash; 2020</span><div><h3>Freelance</h3><p>Creative lead and contractor: branding, weddings, corporate and event video.</p></div></div>
-        </div>
-      </div>
-    </section>
-
     <!-- CONTACT -->
     <section id="contact" class="section contact">
       <p class="label reveal">Contact</p>
@@ -391,6 +407,6 @@
 
   <script src="analytics/config.js"></script>
   <script src="analytics/tracker.js" defer></script>
-  <script src="script.js?v=7"></script>
+  <script src="script.js?v=8"></script>
 </body>
 </html>

@@ -17,15 +17,6 @@
   setTimeout(() => items.forEach((el) => el.classList.add('in')), 8000);
 })();
 
-// ---------- Portrait flip ----------
-(() => {
-  const card = document.getElementById('portrait');
-  if (!card) return;
-  const toggle = () => card.setAttribute('aria-pressed', String(card.classList.toggle('flipped')));
-  card.addEventListener('click', toggle);
-  card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
-})();
-
 // ---------- Videos play on the page ----------
 // Case-study thumbnails play in place; reels open a vertical player popup.
 (() => {
@@ -150,4 +141,98 @@
   new IntersectionObserver(([e]) => {
     nav.classList.toggle('nav--hidden', e.isIntersecting || e.boundingClientRect.top > 0);
   }, { threshold: 0 }).observe(hero);
+})();
+
+// ---------- ID card: drops in with gravity, swings on its lanyard, flips on click ----------
+// A small physics loop: the card falls, bounces once or twice when the strap catches it, and the
+// impact sets it swinging like a pendulum. Drag it sideways to swing it yourself; click to flip it.
+(() => {
+  const swing = document.getElementById('idSwing');
+  const tilt = document.getElementById('idTilt');
+  const card = document.getElementById('idCard');
+  if (!swing || !tilt || !card) return;
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const G = 2600;          // gravity, px/s^2
+  const K = 26;            // pendulum stiffness
+  const C = 1.9;           // damping
+  let y = reduce ? 0 : -(window.innerHeight * 0.95 + 200);
+  let vy = 0, angle = 0, av = 0;
+  let tiltX = 0, tiltY = 0, tiltTX = 0, tiltTY = 0;
+  let dragging = false, moved = false, startX = 0, startAngle = 0;
+  let raf = 0, last = 0;
+
+  const draw = () => {
+    swing.style.transform = 'translateY(' + y.toFixed(1) + 'px) rotate(' + angle.toFixed(2) + 'deg)';
+    tilt.style.transform = 'rotateX(' + tiltX.toFixed(2) + 'deg) rotateY(' + tiltY.toFixed(2) + 'deg)';
+  };
+
+  const step = (now) => {
+    const dt = Math.min((now - last) / 1000, 1 / 30);
+    last = now;
+
+    // Falling: gravity until the strap catches the card, then a damped bounce.
+    if (y < 0 || vy < 0) {
+      vy += G * dt;
+      y += vy * dt;
+      if (y >= 0) {
+        y = 0;
+        if (vy > 160) {
+          av += Math.min(vy * 0.016, 34);   // the jolt starts the swing
+          vy = -vy * 0.3;
+        } else vy = 0;
+      }
+    }
+    // Swinging: damped pendulum about the top of the strap (held still while dragging).
+    if (!dragging) {
+      av += (-K * angle - C * av) * dt;
+      angle += av * dt;
+    }
+    // Soft 3D tilt toward the pointer.
+    tiltX += (tiltTX - tiltX) * Math.min(1, dt * 9);
+    tiltY += (tiltTY - tiltY) * Math.min(1, dt * 9);
+
+    draw();
+    const settled = y === 0 && vy === 0 && !dragging && Math.abs(angle) < 0.03 && Math.abs(av) < 0.05
+      && Math.abs(tiltX - tiltTX) < 0.02 && Math.abs(tiltY - tiltTY) < 0.02;
+    if (settled) { angle = av = 0; draw(); raf = 0; return; }
+    raf = requestAnimationFrame(step);
+  };
+  const run = () => { if (!raf) { last = performance.now(); raf = requestAnimationFrame(step); } };
+
+  draw();
+  if (!reduce) run();
+
+  const flip = () => card.setAttribute('aria-pressed', String(card.classList.toggle('flipped')));
+
+  // Pointer: drag to swing, click (no drag) to flip, hover to tilt in 3D.
+  card.addEventListener('pointerdown', (e) => {
+    dragging = true; moved = false; startX = e.clientX; startAngle = angle; av = 0;
+    card.setPointerCapture(e.pointerId);
+    run();
+  });
+  card.addEventListener('pointermove', (e) => {
+    if (dragging) {
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 6) moved = true;
+      angle = Math.max(-38, Math.min(38, startAngle - dx * 0.2));
+      return;
+    }
+    if (reduce) return;
+    const r = card.getBoundingClientRect();
+    tiltTY = ((e.clientX - r.left) / r.width - 0.5) * 18;
+    tiltTX = -((e.clientY - r.top) / r.height - 0.5) * 12;
+    run();
+  });
+  card.addEventListener('pointerup', (e) => {
+    dragging = false;
+    if (card.hasPointerCapture(e.pointerId)) card.releasePointerCapture(e.pointerId);
+    if (!moved) flip();
+    run();
+  });
+  card.addEventListener('pointercancel', () => { dragging = false; run(); });
+  card.addEventListener('pointerleave', () => { if (!dragging) { tiltTX = tiltTY = 0; run(); } });
+  card.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); }
+  });
 })();
