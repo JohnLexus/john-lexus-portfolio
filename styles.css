@@ -11,28 +11,11 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:84px}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
-body.curtain-on{overflow:hidden}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 h1,h2,h3,p{margin:0}
 ::selection{background:var(--lime);color:var(--lime-ink)}
 .label{font:700 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--lime)}
-
-/* ---------- Welcome: diagonal split ---------- */
-.curtain{position:fixed;inset:0;z-index:1000;pointer-events:all;--ang:-30deg;--fs:120px}
-.curtain.done{display:none}
-.dpanel{position:fixed;inset:0;background:var(--lime);transition:transform 1.8s cubic-bezier(.76,0,.24,1)}
-.dpanel.a{clip-path:polygon(0 0,100% 0,0 100%)}
-.dpanel.b{clip-path:polygon(100% 0,100% 100%,0 100%)}
-.dfill{position:absolute;inset:0;background:radial-gradient(120% 120% at 50% 50%,#1b1b1b,#0b0b0b)}
-.dpanel.a .dfill{clip-path:polygon(0 0,calc(100% - 5px) 0,0 calc(100% - 5px))}
-.dpanel.b .dfill{clip-path:polygon(100% 5px,100% 100%,5px 100%)}
-.curtain.open .dpanel.a{transform:translate(-105%,-105%)}
-.curtain.open .dpanel.b{transform:translate(105%,105%)}
-/* The word runs along the diagonal seam, so each panel keeps one half of every letter. */
-.dword{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(var(--ang));white-space:nowrap}
-.dword span{display:block;font:400 var(--fs)/1 var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);padding-left:.08em;opacity:0;transform:translateY(24px);animation:welcomeIn 1s var(--ease) .15s forwards}
-@keyframes welcomeIn{to{opacity:1;transform:none}}
 
 /* ---------- Reveal helpers ---------- */
 .js .rise,.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
@@ -148,7 +131,6 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .curtain{display:none}
   .js .rise,.js .reveal{opacity:1;transform:none;transition:none}
   .portrait-inner{transition:none}
 }
