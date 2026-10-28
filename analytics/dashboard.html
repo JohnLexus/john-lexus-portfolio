@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Portfolio Analytics</title>
+  <style>
+    :root { --bg:#070707; --panel:#0d0d0d; --line:#1d1d1d; --ink:#eee9e0; --muted:#85827c; --accent:#d22a25; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, sans-serif; }
+    main { max-width:1100px; margin:0 auto; padding:24px 16px 64px; }
+    h1 { font-size:20px; margin:0; }
+    h2 { font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin:0 0 12px; font-weight:600; }
+    header { display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; margin-bottom:24px; }
+    .controls { display:flex; gap:8px; align-items:center; }
+    select, button, input { background:var(--panel); color:var(--ink); border:1px solid var(--line); border-radius:6px; padding:8px 12px; font:inherit; }
+    button { cursor:pointer; } button:hover { border-color:var(--accent); }
+    .grid { display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); }
+    .kpis { display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); margin-bottom:16px; }
+    .card { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:16px; }
+    .kpi b { display:block; font-size:28px; font-weight:600; }
+    .kpi span { color:var(--muted); font-size:12px; }
+    .row { display:grid; grid-template-columns:1fr auto; gap:4px 12px; margin-bottom:10px; font-size:13px; }
+    .row .name { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .row .num { color:var(--muted); font-variant-numeric:tabular-nums; }
+    .bar { grid-column:1 / -1; height:4px; background:var(--line); border-radius:2px; }
+    .bar i { display:block; height:100%; background:var(--accent); border-radius:2px; }
+    .wide { grid-column:1 / -1; }
+    .empty { color:var(--muted); font-size:13px; }
+    #login { max-width:340px; margin:20vh auto; display:grid; gap:10px; }
+    #login input { width:100%; }
+    #err { color:var(--accent); font-size:13px; min-height:1em; }
+    svg text { fill:var(--muted); font-size:10px; }
+  </style>
+</head>
+<body>
+<main>
+  <form id="login" hidden>
+    <h1>Portfolio Analytics</h1>
+    <input id="email" type="email" placeholder="Email" autocomplete="username" required />
+    <input id="pass" type="password" placeholder="Password" autocomplete="current-password" required />
+    <button>Sign in</button>
+    <div id="err"></div>
+  </form>
+
+  <div id="app" hidden>
+    <header>
+      <h1>Portfolio Analytics</h1>
+      <div class="controls">
+        <select id="range">
+          <option value="7">Last 7 days</option>
+          <option value="30" selected>Last 30 days</option>
+          <option value="90">Last 90 days</option>
+        </select>
+        <button id="refresh">Refresh</button>
+        <button id="out">Sign out</button>
+      </div>
+    </header>
+    <div class="kpis" id="kpis"></div>
+    <div class="grid" id="panels"></div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="config.js"></script>
+<script>
+const cfg = window.JL_ANALYTICS || {};
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+if (!cfg.url || !cfg.anonKey) {
+  document.body.innerHTML = '<main><p class="empty">Fill in analytics/config.js first.</p></main>';
+  throw new Error('config missing');
+}
+const sb = supabase.createClient(cfg.url, cfg.anonKey);
+
+async function init() {
+  const { data } = await sb.auth.getSession();
+  data.session ? show() : ($('login').hidden = false, $('app').hidden = true);
+}
+$('login').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const { error } = await sb.auth.signInWithPassword({ email: $('email').value, password: $('pass').value });
+  if (error) $('err').textContent = error.message; else show();
+});
+$('out').onclick = async () => { await sb.auth.signOut(); location.reload(); };
+$('refresh').onclick = load;
+$('range').onchange = load;
+
+function show() { $('login').hidden = true; $('app').hidden = false; load(); }
+
+async function load() {
+  const since = new Date(Date.now() - $('range').value * 864e5).toISOString();
+  let rows = [], from = 0;
+  while (true) { // page through PostgREST's 1000-row cap
+    const { data, error } = await sb.from('events').select('*').gte('created_at', since)
+      .order('created_at', { ascending: true }).range(from, from + 999);
+    if (error) { $('panels').innerHTML = '<p class="empty">' + esc(error.message) + '</p>'; return; }
+    rows = rows.concat(data);
+    if (data.length < 1000 || rows.length >= 50000) break;
+    from += 1000;
+  }
+  render(rows);
+}
+
+const group = (arr, keyFn) => { const m = new Map(); arr.forEach((r) => { const k = keyFn(r); if (k) m.set(k, [...(m.get(k) || []), r]); }); return m; };
+const fmtSecs = (s) => s >= 60 ? Math.floor(s / 60) + 'm ' + Math.round(s % 60) + 's' : Math.round(s) + 's';
+const host = (u) => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return u; } };
+
+function list(title, items, { wide = false } = {}) {
+  const max = Math.max(1, ...items.map((i) => i.n));
+  const body = items.length ? items.map((i) => `<div class="row"><span class="name" title="${esc(i.name)}">${esc(i.name)}</span><span class="num">${esc(i.label ?? i.n)}</span><div class="bar"><i style="width:${(i.n / max) * 100}%"></i></div></div>`).join('') : '<div class="empty">No data yet</div>';
+  return `<div class="card${wide ? ' wide' : ''}"><h2>${esc(title)}</h2>${body}</div>`;
+}
+const top = (m, n = 10) => [...m.entries()].map(([name, rs]) => ({ name, n: rs.length })).sort((a, b) => b.n - a.n).slice(0, n);
+
+function render(rows) {
+  const sessions = group(rows, (r) => r.session_id);
+  const views = rows.filter((r) => r.type === 'pageview');
+  const ends = rows.filter((r) => r.type === 'session_end');
+  const avgTime = ends.length ? ends.reduce((a, r) => a + Number(r.value), 0) / ends.length : 0;
+  const clicks = rows.filter((r) => r.type === 'click');
+  const deep = [...sessions.values()].filter((rs) => rs.some((r) => r.type === 'scroll_depth' && r.value >= 75)).length;
+  const engaged = [...sessions.values()].filter((rs) => rs.some((r) => r.type === 'click')).length;
+  const tagged = group(views, (r) => r.ref_tag);
+
+  $('kpis').innerHTML = [
+    [views.length, 'Visits'],
+    [sessions.size, 'Unique sessions'],
+    [fmtSecs(avgTime), 'Avg time on site'],
+    [sessions.size ? Math.round((deep / sessions.size) * 100) + '%' : '0%', 'Scrolled 75%+'],
+    [sessions.size ? Math.round((engaged / sessions.size) * 100) + '%' : '0%', 'Clicked something'],
+  ].map(([v, l]) => `<div class="card kpi"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('');
+
+  // Interest: total dwell per section + how many sessions reached it.
+  const dwell = group(rows.filter((r) => r.type === 'section_view'), (r) => r.target);
+  const sectionItems = [...dwell.entries()].map(([name, rs]) => {
+    const total = rs.reduce((a, r) => a + Number(r.value), 0);
+    const sess = new Set(rs.map((r) => r.session_id)).size;
+    return { name, n: total, label: `${sess} visitors · avg ${fmtSecs(total / sess)}` };
+  }).sort((a, b) => b.n - a.n);
+
+  const clickGroups = group(clicks, (r) => r.target);
+  const outbound = group(clicks, (r) => r.href && r.href !== 'mailto' ? host(r.href) : r.href);
+  const refs = group(views, (r) => r.referrer ? host(r.referrer) : 'direct / unknown');
+  const days = group(views, (r) => r.created_at.slice(0, 10));
+
+  $('panels').innerHTML =
+    chart(days) +
+    list('What holds attention (time per section)', sectionItems, { wide: true }) +
+    list('Most clicked (reels, links, CTAs)', top(clickGroups, 12)) +
+    list('Where clicks lead', top(outbound)) +
+    list('Where visitors come from', top(refs)) +
+    list('Outreach tags (?ref=…)', top(tagged)) +
+    list('UTM campaigns', top(group(views, (r) => r.utm_campaign))) +
+    list('Devices', top(group(views, (r) => r.device))) +
+    list('Timezones (rough location)', top(group(views, (r) => r.tz))) +
+    list('Scroll depth reached', ['25%', '50%', '75%', '100%'].map((m) => ({ name: m, n: new Set(rows.filter((r) => r.type === 'scroll_depth' && r.target === m).map((r) => r.session_id)).size })));
+}
+
+function chart(days) {
+  const entries = [...days.entries()].map(([d, rs]) => [d, rs.length]).sort();
+  if (!entries.length) return '<div class="card wide"><h2>Visits per day</h2><div class="empty">No data yet</div></div>';
+  const max = Math.max(...entries.map((e) => e[1])), W = 1000, H = 120, bw = W / entries.length;
+  const bars = entries.map(([d, n], i) => `<rect x="${i * bw + 1}" y="${H - (n / max) * (H - 14)}" width="${Math.max(bw - 2, 1)}" height="${(n / max) * (H - 14)}" fill="var(--accent)"><title>${d}: ${n}</title></rect>`).join('');
+  return `<div class="card wide"><h2>Visits per day</h2><svg viewBox="0 0 ${W} ${H + 14}" width="100%" role="img" aria-label="Visits per day">${bars}<text x="0" y="${H + 12}">${entries[0][0]}</text><text x="${W}" y="${H + 12}" text-anchor="end">${entries.at(-1)[0]}</text></svg></div>`;
+}
+
+init();
+</script>
+</body>
+</html>

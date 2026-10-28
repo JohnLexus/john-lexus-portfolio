@@ -1,57 +1,11 @@
-# John Lexus — Creative Producer Portfolio (V3)
+# John Lexus Hinolan: Portfolio (v4)
 
-A separate portfolio site, standalone from the main site at
-https://johnlexus.github.io/Portfolio/. No build step — static HTML/CSS/JS.
+Static HTML/CSS/JS, no build step. Open `index.html` or serve the folder.
 
-```
-reel-portfolio/
-├── index.html
-├── styles.css
-├── script.js
-└── assets/
-    ├── hero.jpg           # live hero photo
-    └── fonts/              # unused holdover from an earlier direction, harmless
-```
+- Curtain intro ("Welcome") opens on load; hero, proof strip, reels, three case studies, about, contact.
+- Videos play on the page (reels in a popup player, case studies in place).
+- Anonymous analytics: `analytics/` (tracker, Supabase schema, private dashboard). Fill `analytics/config.js`.
+- Add `?notrack=1` to the live URL once to exclude your own browser.
 
-Open `index.html` directly in a browser, or serve the folder with any static host.
-
-## Design system
-
-- **Playfair Display** — headlines, project titles, big numbers
-- **Manrope** — body copy
-- **DM Mono** — labels, nav, tags, dates
-- Palette: bg `#070707`, panel `#0d0d0d`, text `#eee9e0`, muted `#85827c`,
-  accent red `#b21b1b` / `#d22a25`
-
-Positioning: *"You don't need another editor. You need someone who can own
-the creative."* — the site is built to make the case that John operates
-across production, editing, strategy, systems, leadership and AI.
-
-## Real links wired in
-
-- 4 featured/grid projects link to real YouTube videos (thumbnails pulled
-  live from YouTube — no local image needed)
-- 8 short-form clips linked in the Shorts block
-- Real LinkedIn: linkedin.com/in/john-lexus-hinolan-a8b722215
-- Real Upwork profile link
-
-## ⚠️ Still needs your input before this goes live anywhere
-
-1. **Experience dates** — this version's timeline (Self-Employed 2025–Present,
-   The VA Group 2024–2026, Sunstar Bacolod 2023–2024) does not match the
-   dates from your resume zip (Sunstar Bacolod Jan–Aug **2020**, VA Group
-   **Jan 2023**–Jul 2026). One of these is wrong. Confirm the correct dates
-   before publishing — this is exactly the kind of inconsistency that hurts
-   credibility if a recruiter cross-checks LinkedIn/resume.
-2. **`assets/testimonial-shane.png`** — referenced in the Social Proof
-   section but not included in the file yet. Drop the actual screenshot in
-   `assets/` with that exact filename, or send it and it'll get added.
-
-## Menu + popup files
-
-The Menu chip (top right) is the site's only navigation. Each word in the full-screen menu
-opens its own popup (`#file-work`, `#file-process`, ...), defined at the bottom of
-`index.html`. Close with the Close button, Esc, a click outside, or the browser Back button.
-Menu: `menu.css` / `menu.js`. Popups: `files.js` (+ the popup section of `menu.css`).
-The earlier redesign (analytics, in-page video lightbox, etc.) lives on branch
-`backup/redesign-2026-10-27`.
+Earlier versions are on branches: `backup/redesign-2026-10-27` (file popups, analytics, video lightbox)
+and `backup/menu-popups-2026-10-28` (full-screen menu + popups on the original design).
