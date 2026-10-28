@@ -18,22 +18,20 @@ h1,h2,h3,p{margin:0}
 ::selection{background:var(--lime);color:var(--lime-ink)}
 .label{font:700 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--lime)}
 
-/* ---------- Curtain ---------- */
-.curtain{position:fixed;inset:0;z-index:1000;pointer-events:all}
+/* ---------- Welcome: diagonal split ---------- */
+.curtain{position:fixed;inset:0;z-index:1000;pointer-events:all;--ang:-30deg;--fs:120px}
 .curtain.done{display:none}
-.curtain-panel{position:fixed;top:0;bottom:0;width:50.2vw;overflow:hidden;transition:transform 1.8s cubic-bezier(.76,0,.24,1);
-  background:
-    linear-gradient(180deg,rgba(0,0,0,.55),transparent 22%,transparent 78%,rgba(0,0,0,.55)),
-    repeating-linear-gradient(90deg,#161616 0,#202020 38px,#0e0e0e 76px,#161616 114px)}
-.curtain-panel.left{left:0;border-right:3px solid var(--lime)}
-.curtain-panel.right{right:0;border-left:3px solid var(--lime)}
-.curtain.open .curtain-panel.left{transform:translateX(-102%)}
-.curtain.open .curtain-panel.right{transform:translateX(102%)}
-/* The word is centred across the seam: each panel shows its own half of it. */
-.curtain-word{position:absolute;top:0;bottom:0;width:100vw;display:flex;align-items:center;justify-content:center}
-.curtain-panel.left .curtain-word{left:0}
-.curtain-panel.right .curtain-word{left:-50vw}
-.curtain-word span{font:400 clamp(64px,14vw,210px)/1 var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);padding-left:.08em;opacity:0;transform:translateY(24px);animation:welcomeIn 1s var(--ease) .15s forwards}
+.dpanel{position:fixed;inset:0;background:var(--lime);transition:transform 1.8s cubic-bezier(.76,0,.24,1)}
+.dpanel.a{clip-path:polygon(0 0,100% 0,0 100%)}
+.dpanel.b{clip-path:polygon(100% 0,100% 100%,0 100%)}
+.dfill{position:absolute;inset:0;background:radial-gradient(120% 120% at 50% 50%,#1b1b1b,#0b0b0b)}
+.dpanel.a .dfill{clip-path:polygon(0 0,calc(100% - 5px) 0,0 calc(100% - 5px))}
+.dpanel.b .dfill{clip-path:polygon(100% 5px,100% 100%,5px 100%)}
+.curtain.open .dpanel.a{transform:translate(-105%,-105%)}
+.curtain.open .dpanel.b{transform:translate(105%,105%)}
+/* The word runs along the diagonal seam, so each panel keeps one half of every letter. */
+.dword{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(var(--ang));white-space:nowrap}
+.dword span{display:block;font:400 var(--fs)/1 var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);padding-left:.08em;opacity:0;transform:translateY(24px);animation:welcomeIn 1s var(--ease) .15s forwards}
 @keyframes welcomeIn{to{opacity:1;transform:none}}
 
 /* ---------- Reveal helpers ---------- */
@@ -256,3 +254,12 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 .ad-copy p{font-size:17px;line-height:1.7;color:var(--muted);max-width:520px}
 @media (max-width:800px){.ad{grid-template-columns:1fr;gap:28px;justify-items:center;text-align:center}.ad-copy p{margin:0 auto}}
 .reel{display:block}
+
+/* ---------- Play buttons v2: centred with inset+margin:auto, readable on any thumbnail ---------- */
+.reel i,.play,.ad-play{left:0;top:0;right:0;bottom:0;margin:auto;background:rgba(255,255,255,.16);border:1.5px solid rgba(255,255,255,.9);opacity:.65;box-shadow:0 0 0 1px rgba(0,0,0,.3),0 6px 22px rgba(0,0,0,.5);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.reel i:after,.play:after,.ad-play:after{filter:drop-shadow(0 1px 3px rgba(0,0,0,.55))}
+.reel:hover i,.case-media:hover .play,.ad-player:hover .ad-play{background:rgba(255,255,255,.28)}
+
+/* Play buttons v3: dark see-through disc + white ring, visible on light and dark thumbnails */
+.reel i,.play,.ad-play{background:rgba(0,0,0,.5);border:2px solid rgba(255,255,255,.92);opacity:.78;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.reel:hover i,.case-media:hover .play,.ad-player:hover .ad-play{background:rgba(0,0,0,.65);opacity:1}

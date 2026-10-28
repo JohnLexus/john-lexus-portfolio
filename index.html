@@ -12,15 +12,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=6" />
+  <link rel="stylesheet" href="styles.css?v=8" />
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 
-  <!-- Curtain: opens as soon as the page has loaded. Each panel carries half of the word. -->
+  <!-- Welcome: two panels split on a diagonal and slide apart as soon as the page has loaded. Each carries its half of the word. -->
   <div class="curtain" id="curtain" aria-hidden="true">
-    <div class="curtain-panel left"><div class="curtain-word"><span>Welcome</span></div></div>
-    <div class="curtain-panel right"><div class="curtain-word"><span>Welcome</span></div></div>
+    <div class="dpanel a"><div class="dfill"><div class="dword"><span>Welcome</span></div></div></div>
+    <div class="dpanel b"><div class="dfill"><div class="dword"><span>Welcome</span></div></div></div>
   </div>
 
   <header class="nav">
@@ -386,6 +386,6 @@
 
   <script src="analytics/config.js"></script>
   <script src="analytics/tracker.js" defer></script>
-  <script src="script.js?v=4"></script>
+  <script src="script.js?v=5"></script>
 </body>
 </html>

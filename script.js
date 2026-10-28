@@ -11,6 +11,14 @@
   if (!curtain || reduce) { if (curtain) curtain.remove(); reveal(); return; }
 
   document.body.classList.add('curtain-on');
+  // The seam runs corner to corner, so the word is rotated to follow it and sized to the diagonal.
+  const fit = () => {
+    const w = window.innerWidth, h = window.innerHeight;
+    curtain.style.setProperty('--ang', (-Math.atan2(h, w) * 180 / Math.PI).toFixed(2) + 'deg');
+    curtain.style.setProperty('--fs', Math.min(Math.hypot(w, h) * 0.17, 240).toFixed(0) + 'px');
+  };
+  fit();
+  window.addEventListener('resize', fit);
   const MIN_VISIBLE = 1100;        // let "Welcome" be readable even on a fast load
   const OPEN_MS = 1800;            // matches the CSS transition
   const t0 = performance.now();
