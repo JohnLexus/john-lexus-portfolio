@@ -90,13 +90,15 @@
     stage.replaceChildren();               // removing the player stops playback
     if (from) from.focus({ preventScroll: true });
   };
-  document.querySelectorAll('.reel[data-yt], .reel[data-tiktok]').forEach((a) => {
+  document.querySelectorAll('.reel[data-yt], .reel[data-tiktok], .chip[data-instagram]').forEach((a) => {
     a.addEventListener('click', (e) => {
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
       e.preventDefault();
       from = a;
       const f = document.createElement('iframe');
-      f.src = a.dataset.tiktok ? 'https://www.tiktok.com/embed/v2/' + a.dataset.tiktok : src(a.dataset.yt);
+      f.src = a.dataset.tiktok ? 'https://www.tiktok.com/embed/v2/' + a.dataset.tiktok
+        : a.dataset.instagram ? 'https://www.instagram.com/reel/' + a.dataset.instagram + '/embed'
+        : src(a.dataset.yt);
       f.title = a.getAttribute('aria-label') || 'Video';
       f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
       f.allowFullscreen = true;
