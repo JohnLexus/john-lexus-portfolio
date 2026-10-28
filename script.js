@@ -236,3 +236,81 @@
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); }
   });
 })();
+
+// ---------- Viewfinder: running timecode, audio meters, autofocus lock, counting numbers ----------
+(() => {
+  const frame = document.querySelector('.vf-frame');
+  if (!frame) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const stats = [...frame.querySelectorAll('.vf-stat')];
+  const tc = document.getElementById('vfTc');
+  const pad = (n, w = 2) => String(n).padStart(w, '0');
+
+  // Counting numbers, like a recording counter.
+  const count = (el, ms = 1500) => {
+    const strong = el.querySelector('strong');
+    const to = parseFloat(strong.dataset.to), dec = +strong.dataset.dec, suf = strong.dataset.suffix || '';
+    const fmt = (v) => (dec ? v.toFixed(dec) : Math.round(v)) + suf;
+    if (reduce) { strong.textContent = fmt(to); return; }
+    const t0 = performance.now();
+    const tick = (now) => {
+      const p = Math.min(1, (now - t0) / ms), e = 1 - Math.pow(1 - p, 3);
+      strong.textContent = fmt(to * e);
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+
+  // Autofocus: the brackets hunt, then lock lime.
+  const focus = (el, delay = 0) => {
+    clearTimeout(el._t);
+    el.classList.remove('locked');
+    el.classList.remove('hunting');
+    void el.offsetWidth;
+    el._t = setTimeout(() => {
+      el.classList.add('hunting');
+      count(el);
+      el._t = setTimeout(() => el.classList.add('locked'), reduce ? 0 : 900);
+    }, delay);
+  };
+
+  // Timecode + audio meters only run while the viewfinder is on screen.
+  const vuL = document.getElementById('vfVuL'), vuR = document.getElementById('vfVuR');
+  const SEG = 16;
+  [vuL, vuR].forEach((c) => { for (let i = 0; i < SEG; i++) c.appendChild(document.createElement('i')); });
+  let lvl = [0.5, 0.45], timers = [], t0 = 0;
+  const paintVu = (bars, v) => {
+    const on = Math.round(v * SEG);
+    [...bars.children].forEach((s, i) => {
+      s.className = i < on ? 'on' + (i > SEG * 0.85 ? ' hot' : i > SEG * 0.66 ? ' warm' : '') : '';
+    });
+  };
+  const run = () => {
+    if (timers.length || reduce) return;
+    t0 = performance.now();
+    timers.push(setInterval(() => {
+      const f = Math.floor((performance.now() - t0) / (1000 / 30));
+      tc.textContent = pad(Math.floor(f / 108000) % 100) + ':' + pad(Math.floor(f / 1800) % 60) + ':' + pad(Math.floor(f / 30) % 60) + ':' + pad(f % 30);
+    }, 33));
+    timers.push(setInterval(() => {
+      lvl = lvl.map((v) => Math.max(0.12, Math.min(0.98, v + (Math.random() - 0.5) * 0.42 + (0.5 - v) * 0.12)));
+      paintVu(vuL, lvl[0]); paintVu(vuR, lvl[1]);
+    }, 90));
+  };
+  const stop = () => { timers.forEach(clearInterval); timers = []; };
+  if (reduce) { paintVu(vuL, 0.55); paintVu(vuR, 0.5); }
+
+  let seen = false;
+  new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) {
+      run();
+      if (!seen) { seen = true; stats.forEach((el, i) => focus(el, 250 + i * 260)); }
+    } else stop();
+  }, { threshold: 0.3 }).observe(frame);
+
+  // Tap to focus: click or press Enter on a stat to re-run the autofocus.
+  stats.forEach((el) => {
+    el.addEventListener('click', () => focus(el));
+    el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); focus(el); } });
+  });
+})();

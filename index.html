@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=14" />
+  <link rel="stylesheet" href="styles.css?v=15" />
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -87,12 +87,60 @@
       </aside>
     </section>
 
-    <!-- PROOF STRIP -->
-    <section class="proof" aria-label="Highlights">
-      <div class="proof-item reveal"><strong>200K+</strong><span>Organic views, The 1% Podcast / Marked</span></div>
-      <div class="proof-item reveal"><strong>1K+</strong><span>Short-form videos edited</span></div>
-      <div class="proof-item reveal"><strong>5.0</strong><span>Upwork rating</span></div>
-      <div class="proof-item reveal"><strong>8 yrs</strong><span>In video, 3+ working remotely</span></div>
+    <!-- PROOF: camera viewfinder -->
+    <section class="vf" aria-label="Highlights">
+      <div class="vf-frame reveal">
+        <span class="vf-corner tl" aria-hidden="true"></span><span class="vf-corner tr" aria-hidden="true"></span>
+        <span class="vf-corner bl" aria-hidden="true"></span><span class="vf-corner br" aria-hidden="true"></span>
+        <div class="vf-grid" aria-hidden="true"></div>
+        <span class="vf-cross" aria-hidden="true"></span>
+
+        <div class="vf-top" aria-hidden="true">
+          <span class="vf-rec"><i></i>REC</span>
+          <span class="vf-tc" id="vfTc">00:00:00:00</span>
+          <span class="vf-gap"></span>
+          <span class="vf-chip">4K</span><span class="vf-chip">30p</span><span class="vf-chip">H.264</span>
+          <span class="vf-batt"><i></i><i></i><i></i><i></i></span>
+        </div>
+
+        <div class="vf-stats">
+        <div class="vf-stat" tabindex="0" aria-label="200K+ Organic views, The 1% Podcast / Marked">
+          <span class="vf-af" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i></span>
+          <span class="vf-tag" aria-hidden="true">Views</span>
+          <strong data-to="200" data-dec="0" data-suffix="K+">200K+</strong>
+          <span class="vf-sub">Organic views, The 1% Podcast / Marked</span>
+          <span class="vf-lock" aria-hidden="true"><b></b>AF&#8209;S LOCK</span>
+        </div>
+        <div class="vf-stat" tabindex="0" aria-label="1K+ Short-form videos edited">
+          <span class="vf-af" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i></span>
+          <span class="vf-tag" aria-hidden="true">Clips</span>
+          <strong data-to="1" data-dec="0" data-suffix="K+">1K+</strong>
+          <span class="vf-sub">Short-form videos edited</span>
+          <span class="vf-lock" aria-hidden="true"><b></b>AF&#8209;S LOCK</span>
+        </div>
+        <div class="vf-stat" tabindex="0" aria-label="5.0 Upwork rating">
+          <span class="vf-af" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i></span>
+          <span class="vf-tag" aria-hidden="true">Rating</span>
+          <strong data-to="5.0" data-dec="1" data-suffix="">5.0</strong>
+          <span class="vf-sub">Upwork rating</span>
+          <span class="vf-lock" aria-hidden="true"><b></b>AF&#8209;S LOCK</span>
+        </div>
+        <div class="vf-stat" tabindex="0" aria-label="8 yrs In video, 3+ working remotely">
+          <span class="vf-af" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i></span>
+          <span class="vf-tag" aria-hidden="true">Experience</span>
+          <strong data-to="8" data-dec="0" data-suffix=" yrs">8 yrs</strong>
+          <span class="vf-sub">In video, 3+ working remotely</span>
+          <span class="vf-lock" aria-hidden="true"><b></b>AF&#8209;S LOCK</span>
+        </div>
+        </div>
+
+        <div class="vf-bottom" aria-hidden="true">
+          <div class="vf-meter"><span class="vf-lab">EXP</span><div class="vf-scale"><i><b>-3</b></i><i><b>-2</b></i><i><b>-1</b></i><i><b>0</b></i><i><b>+1</b></i><i><b>+2</b></i><i><b>+3</b></i><em></em></div></div>
+          <div class="vf-vu"><span class="vf-lab">AUDIO</span><div class="vf-bars" id="vfVuL"></div><div class="vf-bars" id="vfVuR"></div></div>
+          <div class="vf-hist"><span class="vf-lab">HIST</span><div class="vf-histbars"><i style="height:8%"></i><i style="height:14%"></i><i style="height:22%"></i><i style="height:30%"></i><i style="height:38%"></i><i style="height:46%"></i><i style="height:58%"></i><i style="height:70%"></i><i style="height:82%"></i><i style="height:92%"></i><i style="height:100%"></i><i style="height:88%"></i><i style="height:72%"></i><i style="height:60%"></i><i style="height:52%"></i><i style="height:46%"></i><i style="height:40%"></i><i style="height:36%"></i><i style="height:32%"></i><i style="height:30%"></i><i style="height:34%"></i><i style="height:42%"></i><i style="height:38%"></i><i style="height:26%"></i><i style="height:18%"></i><i style="height:12%"></i><i style="height:8%"></i><i style="height:5%"></i></div></div>
+          <div class="vf-read"><span>ISO 800</span><span>f/2.8</span><span>1/50</span><span>5600K</span></div>
+        </div>
+      </div>
     </section>
 
     <!-- FEATURED AD -->
@@ -407,6 +455,6 @@
 
   <script src="analytics/config.js"></script>
   <script src="analytics/tracker.js" defer></script>
-  <script src="script.js?v=8"></script>
+  <script src="script.js?v=9"></script>
 </body>
 </html>
