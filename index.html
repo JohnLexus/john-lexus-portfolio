@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=16" />
+  <link rel="stylesheet" href="styles.css?v=17" />
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -261,7 +261,9 @@
     </section>
 
     <!-- PROCESS -->
-    <section id="process" class="section acc">
+    <!-- PROCESS + RESULTS: side by side -->
+    <section class="section duo">
+    <div id="process" class="acc">
       <button class="acc-toggle reveal" type="button" aria-expanded="false" aria-controls="process-panel">
         <span class="acc-title"><span class="label">Process</span><h2>Tools &amp; AI workflows</h2></span>
         <i class="acc-icon" aria-hidden="true"></i>
@@ -350,10 +352,10 @@
       <p class="sub reveal">These are a few examples of what I can build. If you want something like these, <a class="inline" href="#contact">let's talk</a>.</p>
     
       </div></div>
-    </section>
+    </div>
 
     <!-- RESULTS -->
-    <section id="results" class="section acc">
+    <div id="results" class="acc">
       <button class="acc-toggle reveal" type="button" aria-expanded="false" aria-controls="results-panel">
         <span class="acc-title"><span class="label">Results</span><h2>Wins &amp; analytics</h2></span>
         <i class="acc-icon" aria-hidden="true"></i>
@@ -416,6 +418,7 @@
       </div>
     
       </div></div>
+    </div>
     </section>
 
     <!-- TESTIMONIALS -->

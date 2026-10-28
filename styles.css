@@ -436,3 +436,17 @@ body:before,body:after{z-index:-1}
   .vf{max-width:none;padding:0;margin:0;perspective:1600px}
   .vf-frame{margin-inline:calc((100vw - min(100vw,1320px))/2 + 6vw);transform-origin:50% 100%;will-change:transform,margin}
 }
+
+/* ---------- Process (left) and Results (right) share one section ---------- */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:start}
+.duo .acc{min-width:0}
+.duo .acc-toggle h2{font-size:clamp(30px,3.4vw,50px)}
+.duo #results .acc-toggle{flex-direction:row-reverse;text-align:right}
+.duo #results .acc-title{text-align:right}
+.duo .stack,.duo .wins,.duo .stat-cards{grid-template-columns:1fr}
+.duo .sub{max-width:none}
+@media (max-width:1000px){
+  .duo{grid-template-columns:1fr;gap:0}
+  .duo #results .acc-toggle{flex-direction:row;text-align:left}
+  .duo #results .acc-title{text-align:left}
+}
