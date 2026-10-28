@@ -459,3 +459,4 @@ body:before,body:after{z-index:-1}
 .feat-copy p{font-size:16px;line-height:1.7;color:var(--muted);max-width:430px;margin:0 auto}
 @media (max-width:800px){.featured{grid-template-columns:1fr;gap:64px}}
 .contact-cta{display:flex;justify-content:center;margin:0 0 32px}
+.cat-text .label{display:block;margin-bottom:10px}
