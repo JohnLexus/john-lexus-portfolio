@@ -430,3 +430,9 @@ body:before,body:after{z-index:-1}
 }
 @media (max-width:560px){.vf-chip{display:none}.vf-scale{width:150px}}
 @media (prefers-reduced-motion:reduce){.vf-rec i,.vf-scale em{animation:none}.vf-stat.hunting .vf-af{animation:none;opacity:1;transform:none}}
+
+/* ---------- Viewfinder (desktop): stretches edge to edge, folds away as you scroll past ---------- */
+@media (min-width:1000px){
+  .vf{max-width:none;padding:0;margin:0;perspective:1600px}
+  .vf-frame{margin-inline:calc((100vw - min(100vw,1320px))/2 + 6vw);transform-origin:50% 100%;will-change:transform,margin}
+}

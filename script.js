@@ -314,3 +314,33 @@
     el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); focus(el); } });
   });
 })();
+
+// ---------- Viewfinder scroll effect (desktop) ----------
+// Stretches from its contained width to full-bleed as it reaches the middle of the screen,
+// then folds back on a hinge at its bottom edge as you scroll on past it.
+(() => {
+  const sec = document.querySelector('.vf');
+  const frame = sec && sec.querySelector('.vf-frame');
+  if (!frame || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const wide = window.matchMedia('(min-width: 1000px)');
+  const smooth = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+  let queued = false;
+
+  const update = () => {
+    queued = false;
+    if (!wide.matches) { frame.style.marginInline = frame.style.borderRadius = frame.style.transform = frame.style.opacity = ''; return; }
+    const vw = window.innerWidth, vh = window.innerHeight, r = sec.getBoundingClientRect();
+    const c = (r.top + r.height / 2 - vh / 2) / (vh / 2 + r.height / 2);   // -1 above, 0 centred, +1 below
+    const open = 1 - smooth(0.12, 0.9, Math.abs(c));                         // 1 when centred
+    const fold = smooth(0.12, 0.9, -c);                                      // 0 -> 1 as it leaves upward
+    const inset = (vw - Math.min(vw, 1320)) / 2 + vw * 0.06;
+    frame.style.marginInline = (inset * (1 - open)).toFixed(1) + 'px';
+    frame.style.borderRadius = (8 * (1 - open)).toFixed(1) + 'px';
+    frame.style.transform = 'rotateX(' + (fold * 62).toFixed(2) + 'deg)';
+    frame.style.opacity = (1 - fold * 0.6).toFixed(3);
+  };
+  const queue = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+  window.addEventListener('scroll', queue, { passive: true });
+  window.addEventListener('resize', queue);
+  update();
+})();
