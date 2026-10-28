@@ -111,3 +111,29 @@
   box.addEventListener('click', (e) => { if (e.target === box) close(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 })();
+
+// ---------- Featured ad: self-hosted video that plays on the page ----------
+(() => {
+  const player = document.getElementById('adPlayer');
+  const video = document.getElementById('adVideo');
+  if (!player || !video) return;
+  const toggle = () => (video.paused ? video.play() : video.pause());
+  player.addEventListener('click', (e) => {
+    if (e.target.closest('video') && video.controls) return;   // native controls handle it once playing
+    toggle();
+  });
+  video.addEventListener('play', () => {
+    player.classList.add('is-playing');
+    video.controls = true;                  // scrub / sound once it has started
+  });
+  video.addEventListener('pause', () => { if (!video.ended) player.classList.remove('is-playing'); });
+  video.addEventListener('ended', () => {
+    player.classList.remove('is-playing');
+    video.controls = false;
+    video.currentTime = 0;
+  });
+  // Starting any other video on the page stops the ad.
+  document.addEventListener('click', (e) => {
+    if (!video.paused && e.target.closest('.reel, .case-media, .chip')) video.pause();
+  });
+})();

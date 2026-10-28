@@ -236,3 +236,23 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
   .flow{padding:22px 18px}
   .nav-links{gap:12px}
 }
+
+/* ---------- Play buttons: low-opacity, centred on every video ---------- */
+.reel i,.play,.ad-play{position:absolute;left:50%;top:50%;border-radius:50%;background:rgba(10,10,10,.42);border:1.5px solid rgba(255,255,255,.75);opacity:.6;transition:opacity .2s,transform .2s,background .2s;padding:0;font-size:0;color:transparent;cursor:pointer}
+.reel i{width:46px;height:46px;margin:-23px 0 0 -23px}
+.play{width:64px;height:64px;margin:-32px 0 0 -32px;right:auto;bottom:auto;letter-spacing:0}
+.ad-play{width:76px;height:76px;margin:-38px 0 0 -38px}
+.reel i:after,.play:after,.ad-play:after{content:"";position:absolute;left:50%;top:50%;border:solid transparent;border-width:9px 0 9px 15px;border-left-color:#fff;transform:translate(-30%,-50%)}
+.play:after{border-width:11px 0 11px 18px}
+.ad-play:after{border-width:13px 0 13px 21px}
+.reel:hover i,.case-media:hover .play,.ad-player:hover .ad-play{opacity:1;transform:scale(1.08);background:rgba(10,10,10,.6)}
+.ad-player.is-playing .ad-play{opacity:0;pointer-events:none}
+
+/* ---------- Featured ad ---------- */
+.ad{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center;border-top:1px solid var(--line);padding-top:40px}
+.ad-player{position:relative;width:min(340px,70vw);aspect-ratio:9/16;border-radius:6px;overflow:hidden;background:#000;border:1px solid var(--line);cursor:pointer}
+.ad-player video{width:100%;height:100%;object-fit:cover;display:block}
+.ad-copy h2{font:400 clamp(40px,5vw,72px)/1 var(--display);text-transform:uppercase;margin:12px 0 16px}
+.ad-copy p{font-size:17px;line-height:1.7;color:var(--muted);max-width:520px}
+@media (max-width:800px){.ad{grid-template-columns:1fr;gap:28px;justify-items:center;text-align:center}.ad-copy p{margin:0 auto}}
+.reel{display:block}
