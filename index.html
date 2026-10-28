@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=17" />
+  <link rel="stylesheet" href="styles.css?v=18" />
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -145,16 +145,29 @@
 
     <!-- FEATURED AD -->
     <section id="ad" class="section">
-      <div class="ad reveal">
-        <div class="ad-player" id="adPlayer">
-          <video id="adVideo" src="assets/portfolio-ad.mp4" poster="assets/portfolio-ad-poster.jpg" preload="metadata" playsinline aria-label="Short-form ad video"></video>
-          <button class="ad-play" type="button" aria-label="Play the ad"></button>
-        </div>
-        <div class="ad-copy">
-          <span class="label">Featured &middot; Ad</span>
-          <h2>Short-form ad</h2>
-          <p>A 16-second vertical ad for a neighborhood laundromat: on-screen captions, a location card and quick cuts through the machines and the space.</p>
-        </div>
+      <div class="featured">
+        <article class="feat reveal">
+          <div class="ad-player" id="adPlayer">
+            <video id="adVideo" src="assets/portfolio-ad.mp4" poster="assets/portfolio-ad-poster.jpg" preload="metadata" playsinline aria-label="Short-form ad video"></video>
+            <button class="ad-play" type="button" aria-label="Play the ad"></button>
+          </div>
+          <div class="feat-copy">
+            <span class="label">Featured &middot; Ad</span>
+            <h2>Short-form ad</h2>
+            <p>A 16-second vertical ad for a neighborhood laundromat: on-screen captions, a location card and quick cuts through the machines and the space.</p>
+          </div>
+        </article>
+        <article class="feat reveal">
+          <div class="ad-player">
+            <video src="assets/talking-head.mp4" poster="assets/talking-head-poster.jpg" preload="metadata" playsinline aria-label="Talking head video"></video>
+            <button class="ad-play" type="button" aria-label="Play the talking head video"></button>
+          </div>
+          <div class="feat-copy">
+            <span class="label">Featured &middot; Talking head</span>
+            <h2>Talking head</h2>
+            <p>An 88-second vertical talking-head edit: on-screen typography, b-roll cutaways and branded graphics built around the speaker.</p>
+          </div>
+        </article>
       </div>
     </section>
 

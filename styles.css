@@ -450,3 +450,11 @@ body:before,body:after{z-index:-1}
   .duo #results .acc-toggle{flex-direction:row;text-align:left}
   .duo #results .acc-title{text-align:left}
 }
+
+/* ---------- Featured: ad + talking head ---------- */
+.featured{display:grid;grid-template-columns:1fr 1fr;gap:5vw;border-top:1px solid var(--line);padding-top:40px}
+.feat{display:flex;flex-direction:column;align-items:center;text-align:center;gap:26px}
+.feat .ad-player{width:min(310px,72vw)}
+.feat-copy h2{font:400 clamp(34px,4vw,56px)/1 var(--display);text-transform:uppercase;margin:10px 0 14px}
+.feat-copy p{font-size:16px;line-height:1.7;color:var(--muted);max-width:430px;margin:0 auto}
+@media (max-width:800px){.featured{grid-template-columns:1fr;gap:64px}}
