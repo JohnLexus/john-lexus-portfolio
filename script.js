@@ -14,8 +14,8 @@
   const snd = new Audio('assets/shutter.mp3');
   snd.preload = 'auto';
 
-  const LOCK_AT = 650;       // autofocus locks
-  const AUTO_AT = 1500;      // fires on its own if nobody taps
+  const LOCK_AT = 1000;      // autofocus locks
+  const AUTO_AT = 2400;      // fires on its own if nobody taps
   let shot = false, finished = false, timers = [];
   const later = (fn, ms) => timers.push(setTimeout(fn, ms));
 
@@ -50,11 +50,11 @@
     lock();
     shutter.classList.add('pressed');
     try { snd.currentTime = 0; const p = snd.play(); if (p && p.catch) p.catch(() => {}); } catch (_) {}
-    later(() => cam.classList.add('blackout'), 30);                          // the viewfinder cuts out
-    later(() => { cam.classList.remove('blackout'); cam.classList.add('flash'); }, 90);   // flash
-    later(() => cam.classList.add('leaving'), 130);                          // fade to the page
-    later(() => window.dispatchEvent(new CustomEvent('jl-intro-reveal')), 190);
-    later(finish, 480);
+    later(() => cam.classList.add('blackout'), 40);                          // the viewfinder cuts out
+    later(() => { cam.classList.remove('blackout'); cam.classList.add('flash'); }, 120);   // flash
+    later(() => cam.classList.add('leaving'), 180);                          // fade to the page
+    later(() => window.dispatchEvent(new CustomEvent('jl-intro-reveal')), 260);
+    later(finish, 700);
   };
 
   const leaveQuietly = () => {                                               // Skip: no sound, no flash
@@ -63,7 +63,7 @@
     timers.forEach(clearTimeout);
     cam.classList.add('leaving');
     window.dispatchEvent(new CustomEvent('jl-intro-reveal'));
-    later(finish, 380);
+    later(finish, 500);
   };
 
   later(lock, LOCK_AT);
