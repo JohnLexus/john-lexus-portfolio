@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=11" />
+  <link rel="stylesheet" href="styles.css?v=13" />
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -180,8 +180,12 @@
     </section>
 
     <!-- PROCESS -->
-    <section id="process" class="section">
-      <div class="section-head reveal"><span class="label">Process</span><h2>Tools &amp; AI workflows</h2></div>
+    <section id="process" class="section acc">
+      <button class="acc-toggle reveal" type="button" aria-expanded="false" aria-controls="process-panel">
+        <span class="acc-title"><span class="label">Process</span><h2>Tools &amp; AI workflows</h2></span>
+        <i class="acc-icon" aria-hidden="true"></i>
+      </button>
+      <div class="acc-panel" id="process-panel"><div class="acc-inner">
       <div class="stack">
         <div class="stack-card reveal">
           <h3>Editing &amp; design</h3>
@@ -263,11 +267,17 @@
         </article>
       </div>
       <p class="sub reveal">These are a few examples of what I can build. If you want something like these, <a class="inline" href="#contact">let's talk</a>.</p>
+    
+      </div></div>
     </section>
 
     <!-- RESULTS -->
-    <section id="results" class="section">
-      <div class="section-head reveal"><span class="label">Results</span><h2>Wins &amp; analytics</h2></div>
+    <section id="results" class="section acc">
+      <button class="acc-toggle reveal" type="button" aria-expanded="false" aria-controls="results-panel">
+        <span class="acc-title"><span class="label">Results</span><h2>Wins &amp; analytics</h2></span>
+        <i class="acc-icon" aria-hidden="true"></i>
+      </button>
+      <div class="acc-panel" id="results-panel"><div class="acc-inner">
       <div class="wins">
         <div class="win reveal">
           <img src="assets/win-200k-views.png" alt="vidIQ 200,000 views milestone for The 1% Podcast" loading="lazy">
@@ -295,7 +305,6 @@
           </div>
           <div class="bar-row"><span>Views from non-followers</span><div class="bar"><i style="width:86.9%"></i></div><b>86.9%</b></div>
           <div class="bar-row"><span>Interactions from non-followers</span><div class="bar"><i style="width:98.5%"></i></div><b>98.5%</b></div>
-          <div class="stat-reels"><a class="chip" data-instagram="DHEKPr3heYK" href="https://www.instagram.com/reel/DHEKPr3heYK/" target="_blank" rel="noopener" aria-label="Play Reel 1: Zeroing Out">Reel 1 &#9654;</a><a class="chip" data-instagram="DHBy8-jPK0g" href="https://www.instagram.com/reel/DHBy8-jPK0g/" target="_blank" rel="noopener" aria-label="Play Reel 2: Zeroing Out">Reel 2 &#9654;</a><a class="chip" data-instagram="DHB6EqMv7EG" href="https://www.instagram.com/reel/DHB6EqMv7EG/" target="_blank" rel="noopener" aria-label="Play Reel 3: Zeroing Out">Reel 3 &#9654;</a></div>
         </article>
         <article class="stat-card reveal">
           <h3>Not Everybody Understands Finance</h3>
@@ -324,6 +333,8 @@
           <div class="bar-row"><span>Interactions from non-followers</span><div class="bar"><i style="width:98.5%"></i></div><b>98.5%</b></div>
         </article>
       </div>
+    
+      </div></div>
     </section>
 
     <!-- TESTIMONIALS -->
@@ -380,6 +391,6 @@
 
   <script src="analytics/config.js"></script>
   <script src="analytics/tracker.js" defer></script>
-  <script src="script.js?v=6"></script>
+  <script src="script.js?v=7"></script>
 </body>
 </html>

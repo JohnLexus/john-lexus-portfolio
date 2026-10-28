@@ -83,28 +83,71 @@
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 })();
 
-// ---------- Featured ad: self-hosted video that plays on the page ----------
+// ---------- Self-hosted videos (the ad, and each Results card) play on the page ----------
 (() => {
-  const player = document.getElementById('adPlayer');
-  const video = document.getElementById('adVideo');
-  if (!player || !video) return;
-  const toggle = () => (video.paused ? video.play() : video.pause());
-  player.addEventListener('click', (e) => {
-    if (e.target.closest('video') && video.controls) return;   // native controls handle it once playing
-    toggle();
+  const players = [...document.querySelectorAll('.ad-player')];
+  players.forEach((player) => {
+    const video = player.querySelector('video');
+    if (!video) return;
+    const toggle = () => (video.paused ? video.play() : video.pause());
+    player.addEventListener('click', (e) => {
+      if (video.controls && e.target.closest('video')) return;   // native controls take over once playing
+      toggle();
+    });
+    video.addEventListener('play', () => {
+      players.forEach((o) => { const v = o.querySelector('video'); if (v && v !== video && !v.paused) v.pause(); });
+      player.classList.add('is-playing');
+      video.controls = true;
+    });
+    video.addEventListener('pause', () => { if (!video.ended) player.classList.remove('is-playing'); });
+    video.addEventListener('ended', () => {
+      player.classList.remove('is-playing');
+      video.controls = false;
+      video.currentTime = 0;
+    });
   });
-  video.addEventListener('play', () => {
-    player.classList.add('is-playing');
-    video.controls = true;                  // scrub / sound once it has started
-  });
-  video.addEventListener('pause', () => { if (!video.ended) player.classList.remove('is-playing'); });
-  video.addEventListener('ended', () => {
-    player.classList.remove('is-playing');
-    video.controls = false;
-    video.currentTime = 0;
-  });
-  // Starting any other video on the page stops the ad.
+  // Opening a YouTube / TikTok video stops any self-hosted one.
   document.addEventListener('click', (e) => {
-    if (!video.paused && e.target.closest('.reel, .case-media, .chip')) video.pause();
+    if (!e.target.closest('.reel, .case-media')) return;
+    players.forEach((o) => { const v = o.querySelector('video'); if (v && !v.paused) v.pause(); });
   });
+})();
+
+// ---------- Process / Results drop-down sections ----------
+(() => {
+  const accs = [...document.querySelectorAll('.acc')];
+  const set = (acc, open) => {
+    acc.classList.toggle('open', open);
+    acc.querySelector('.acc-toggle').setAttribute('aria-expanded', String(open));
+    if (!open) acc.querySelectorAll('.ad-player video').forEach((v) => v.pause());
+  };
+  accs.forEach((acc) => {
+    acc.querySelector('.acc-toggle').addEventListener('click', () => set(acc, !acc.classList.contains('open')));
+    acc.querySelectorAll('.reveal').forEach((el) => el.classList.add('in'));
+  });
+  // Any link to a drop-down section (nav, "let's talk") opens it, then scrolls to it.
+  const go = (id, smooth) => {
+    const acc = document.getElementById(id);
+    if (!acc || !acc.classList.contains('acc')) return false;
+    set(acc, true);
+    setTimeout(() => acc.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' }), 60);
+    return true;
+  };
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (a && go(a.getAttribute('href').slice(1), true)) e.preventDefault();
+  });
+  if (location.hash) go(location.hash.slice(1), false);
+})();
+
+// ---------- Header: hidden over the hero, returns once you scroll past it ----------
+(() => {
+  const nav = document.querySelector('.nav');
+  const hero = document.querySelector('.hero');
+  if (!nav || !hero) return;
+  nav.classList.add('nav--hidden');
+  if (!('IntersectionObserver' in window)) { nav.classList.remove('nav--hidden'); return; }
+  new IntersectionObserver(([e]) => {
+    nav.classList.toggle('nav--hidden', e.isIntersecting || e.boundingClientRect.top > 0);
+  }, { threshold: 0 }).observe(hero);
 })();
