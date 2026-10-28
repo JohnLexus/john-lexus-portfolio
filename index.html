@@ -12,10 +12,55 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=20" />
+  <link rel="stylesheet" href="styles.css?v=22" />
   <script>document.documentElement.classList.add('js')</script>
+  <script>
+    (function () {
+      try {
+        var forced = /[?&]intro=1/.test(location.search);
+        var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var seen = false; try { seen = !!sessionStorage.getItem('jl_intro'); } catch (e) {}
+        if (!reduce && (forced || !seen)) document.documentElement.classList.add('intro-pending');
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
+  <!-- Camera intro: a viewfinder focuses, then the shutter fires and reveals the page -->
+  <div class="cam" id="cam" role="dialog" aria-label="Camera intro. Press the shutter to enter the site.">
+    <div class="cam-scene"><img src="assets/hero-portrait.jpg" alt=""></div>
+    <div class="cam-shade"></div>
+    <div class="cam-grid"></div>
+    <div class="cam-level" aria-hidden="true"><i></i><b></b><i></i></div>
+
+    <div class="cam-af" id="camAf" aria-hidden="true">
+      <i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
+      <span class="cam-aflab">AF&#8209;S</span>
+    </div>
+    <div class="cam-msg" id="camMsg" aria-live="polite">FOCUSING&hellip;</div>
+
+    <div class="cam-top">
+      <span class="cam-rec"><i></i>REC</span>
+      <span class="cam-tc" id="camTc">00:00:00:00</span>
+      <span class="cam-gap"></span>
+      <span class="cam-chip">4K</span><span class="cam-chip">30p</span>
+      <span class="cam-batt" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <button class="cam-skip" id="camSkip" type="button">Skip &rsaquo;</button>
+    </div>
+
+    <div class="cam-bottom">
+      <div class="cam-meter" aria-hidden="true"><span>EXP</span><div class="cam-scale"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><em></em></div></div>
+      <div class="cam-shutter-wrap">
+        <button class="cam-shutter" id="camShutter" type="button" aria-label="Shutter. Press to enter the site."></button>
+        <span class="cam-tap">Tap to shoot</span>
+      </div>
+      <div class="cam-read" aria-hidden="true"><span>ISO 800</span><span>f/2.8</span><span>1/50</span><span>5600K</span></div>
+    </div>
+
+    <div class="cam-black" aria-hidden="true"></div>
+    <div class="cam-flash" aria-hidden="true"></div>
+  </div>
+
 
   <header class="nav">
     <a class="brand" href="#top"><img src="assets/jl-monogram.png" alt=""><span>John Lexus</span></a>
@@ -477,6 +522,6 @@
 
   <script src="analytics/config.js"></script>
   <script src="analytics/tracker.js" defer></script>
-  <script src="script.js?v=10"></script>
+  <script src="script.js?v=11"></script>
 </body>
 </html>

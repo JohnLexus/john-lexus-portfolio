@@ -1,9 +1,92 @@
-// ---------- Hero reveal: content rises in as soon as the page loads ----------
+// ---------- Camera intro ----------
+// A viewfinder focuses and locks, then the shutter fires (click + blackout + flash) and the page appears.
+// Browsers only allow sound after a tap, so tapping the shutter plays the click. Left alone, it fires by
+// itself after a few seconds (silently if the browser blocks audio). It shows once per tab session; add ?intro=1 to replay.
 (() => {
-  document.querySelectorAll('.rise').forEach((el, i) => {
+  const root = document.documentElement;
+  const cam = document.getElementById('cam');
+  if (!cam || !root.classList.contains('intro-pending')) { if (cam) cam.remove(); return; }
+
+  const shutter = document.getElementById('camShutter');
+  const skip = document.getElementById('camSkip');
+  const msg = document.getElementById('camMsg');
+  const tc = document.getElementById('camTc');
+  const snd = new Audio('assets/shutter.mp3');
+  snd.preload = 'auto';
+
+  const LOCK_AT = 1900;      // autofocus locks
+  const AUTO_AT = 4800;      // fires on its own if nobody taps
+  let shot = false, finished = false, timers = [];
+  const later = (fn, ms) => timers.push(setTimeout(fn, ms));
+
+  // Running timecode, like the viewfinder strip.
+  const t0 = performance.now();
+  const tcTimer = setInterval(() => {
+    const f = Math.floor((performance.now() - t0) / (1000 / 30));
+    const p = (n) => String(n).padStart(2, '0');
+    tc.textContent = '00:00:' + p(Math.floor(f / 30) % 60) + ':' + p(f % 30);
+  }, 33);
+
+  const lock = () => {
+    if (cam.classList.contains('locked')) return;
+    cam.classList.add('locked');
+    msg.textContent = 'FOCUS LOCKED';
+  };
+  const finish = () => {
+    if (finished) return;
+    finished = true;
+    clearInterval(tcTimer);
+    timers.forEach(clearTimeout);
+    try { sessionStorage.setItem('jl_intro', '1'); } catch (_) {}
+    root.classList.remove('intro-pending');
+    cam.remove();
+    window.dispatchEvent(new CustomEvent('jl-intro-done'));
+  };
+
+  const shoot = () => {
+    if (shot) return;
+    shot = true;
+    timers.forEach(clearTimeout);
+    lock();
+    shutter.classList.add('pressed');
+    try { snd.currentTime = 0; const p = snd.play(); if (p && p.catch) p.catch(() => {}); } catch (_) {}
+    later(() => cam.classList.add('blackout'), 70);                          // the viewfinder cuts out
+    later(() => { cam.classList.remove('blackout'); cam.classList.add('flash'); }, 190);   // flash
+    later(() => cam.classList.add('leaving'), 270);                          // fade to the page
+    later(() => window.dispatchEvent(new CustomEvent('jl-intro-reveal')), 420);
+    later(finish, 1150);
+  };
+
+  const leaveQuietly = () => {                                               // Skip: no sound, no flash
+    if (shot) return;
+    shot = true;
+    timers.forEach(clearTimeout);
+    cam.classList.add('leaving');
+    window.dispatchEvent(new CustomEvent('jl-intro-reveal'));
+    later(finish, 800);
+  };
+
+  later(lock, LOCK_AT);
+  later(shoot, AUTO_AT);
+
+  cam.addEventListener('click', (e) => { if (e.target.closest('#camSkip')) return; shoot(); });
+  skip.addEventListener('click', (e) => { e.stopPropagation(); leaveQuietly(); });
+  document.addEventListener('keydown', (e) => {
+    if (finished || shot) return;
+    if (e.key === 'Escape') leaveQuietly();
+    else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); shoot(); }
+  });
+  shutter.focus({ preventScroll: true });
+})();
+
+// ---------- Hero reveal: content rises in once the camera intro (if any) has fired ----------
+(() => {
+  const go = () => document.querySelectorAll('.rise').forEach((el, i) => {
     el.style.transitionDelay = (i * 110) + 'ms';
     el.classList.add('in');
   });
+  if (document.documentElement.classList.contains('intro-pending')) window.addEventListener('jl-intro-reveal', go, { once: true });
+  else go();
 })();
 
 // ---------- Scroll reveal ----------
@@ -201,7 +284,10 @@
   const run = () => { if (!raf) { last = performance.now(); raf = requestAnimationFrame(step); } };
 
   draw();
-  if (!reduce) run();
+  if (!reduce) {
+    if (document.documentElement.classList.contains('intro-pending')) window.addEventListener('jl-intro-reveal', run, { once: true });
+    else run();
+  }
 
   const flip = () => card.setAttribute('aria-pressed', String(card.classList.toggle('flipped')));
 
