@@ -30,34 +30,11 @@ h1,h2,h3,p{margin:0}
 .nav-links a{font:700 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);transition:color .2s}
 .nav-links a:hover{color:var(--lime)}
 
-/* ---------- Hero (centred) ---------- */
-.hero{max-width:1100px;margin:0 auto;padding:128px 6vw 80px;text-align:center}
-.hero-title{white-space:nowrap;font:700 clamp(7px,2.2vw,22px)/1.6 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin-bottom:34px}
-.portrait{position:relative;width:min(300px,68vw);aspect-ratio:4/5;margin:0 auto 38px;perspective:1400px;cursor:pointer;outline-offset:6px}
-.portrait-inner{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .85s var(--ease)}
-.portrait.flipped .portrait-inner{transform:rotateY(180deg)}
-.portrait-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:4px;overflow:hidden;border:1px solid var(--line)}
-.portrait-front{background:var(--surface)}
-.portrait-front img{width:100%;height:100%;object-fit:cover}
-.portrait-hint{position:absolute;right:12px;bottom:12px;padding:7px 11px;border-radius:20px;background:var(--lime);color:var(--lime-ink);font:700 10px var(--mono);letter-spacing:.08em;text-transform:uppercase}
-.portrait-back{transform:rotateY(180deg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:28px;background:var(--surface);border-color:var(--lime)}
-.portrait-back h2{font:400 clamp(34px,4vw,52px)/1 var(--display);letter-spacing:.01em;text-transform:uppercase}
-.portrait-back p{font:700 12px/1.7 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--lime);text-wrap:balance}
-.portrait-back p span{white-space:nowrap}
-.hero-line{font:500 clamp(22px,2.7vw,34px)/1.38 var(--body);max-width:700px;margin:0 auto 36px;letter-spacing:-.005em}
-.hero-line em{font-style:normal;color:var(--lime)}
-.hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;padding:15px 26px;font:700 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;border-radius:2px;transition:.2s}
 .btn-primary{background:var(--lime);color:var(--lime-ink)}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(200,255,0,.4)}
-.btn-ghost{border:1px solid var(--line)}
-.btn-ghost:hover{border-color:var(--lime);color:var(--lime)}
 
 /* ---------- Proof strip ---------- */
-.proof{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-block:1px solid var(--line)}
-.proof-item{background:var(--surface);padding:42px 22px;text-align:center}
-.proof-item strong{display:block;font:400 clamp(44px,5.4vw,76px)/1 var(--display);color:var(--lime)}
-.proof-item span{display:block;margin-top:10px;font:700 11px/1.5 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 
 /* ---------- Sections ---------- */
 .section{max-width:1240px;margin:0 auto;padding:110px 6vw 0}
@@ -73,29 +50,16 @@ h1,h2,h3,p{margin:0}
 .reel:hover{transform:translateY(-4px);border-color:var(--lime)}
 
 /* Case studies */
-.case{display:grid;grid-template-columns:1.2fr 1fr;gap:44px;align-items:center;padding:36px 0;border-top:1px solid var(--line)}
-.case:nth-of-type(even){grid-template-columns:1fr 1.2fr}
-.case:nth-of-type(even) .case-media{order:2}
+
 .case-media{position:relative;display:block;aspect-ratio:16/9;border-radius:4px;overflow:hidden;background:var(--surface);border:1px solid var(--line)}
 .case-media img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
 .case-media:hover img{transform:scale(1.04)}
 .play{position:absolute;right:14px;bottom:14px;background:var(--lime);color:var(--lime-ink);font:700 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:9px 14px;border-radius:2px}
-.case-copy h3{font:400 clamp(34px,3.6vw,52px)/1 var(--display);text-transform:uppercase;margin:8px 0 16px}
-.case-copy p{font-size:15px;line-height:1.65;color:var(--muted);margin-bottom:10px}
-.case-copy b{color:var(--ink);font-weight:600}
+
 .inline{color:var(--lime);border-bottom:1px solid currentColor}
 .yt-frame{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
 
 /* About */
-.about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-.about-copy p{font-size:17px;line-height:1.75;color:var(--muted);margin-bottom:18px}
-.about-copy blockquote{margin:28px 0 0;padding:24px 26px;border:1px solid var(--line);border-left:3px solid var(--lime);border-radius:4px;background:var(--surface);font:500 15px/1.65 var(--body);color:var(--ink)}
-.about-copy cite{display:block;margin-top:14px;font:700 10.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-style:normal}
-.exp{border-top:1px solid var(--line)}
-.exp-row{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:22px 0;border-bottom:1px solid var(--line)}
-.exp-row>span{font:700 11px/1.6 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--lime);padding-top:6px}
-.exp-row h3{font:400 28px/1.05 var(--display);text-transform:uppercase;margin-bottom:6px}
-.exp-row p{font-size:14px;line-height:1.6;color:var(--muted)}
 
 /* Contact */
 .contact{text-align:center;padding-bottom:110px}
@@ -118,21 +82,20 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 
 /* ---------- Mobile ---------- */
 @media (max-width:900px){
-  .hero{padding:104px 5vw 60px}
-  .proof{grid-template-columns:1fr 1fr}
+  
   .section{padding:80px 5vw 0}
   .reels{grid-template-columns:repeat(2,1fr)}
-  .case,.case:nth-of-type(even){grid-template-columns:1fr;gap:20px}
-  .case:nth-of-type(even) .case-media{order:0}
-  .about{grid-template-columns:1fr;gap:36px}
-  .exp-row{grid-template-columns:1fr;gap:4px}
+  
+  
+  
+  
   .nav{padding:14px 5vw}
   .nav-links{gap:18px}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .js .rise,.js .reveal{opacity:1;transform:none;transition:none}
-  .portrait-inner{transition:none}
+  
 }
 
 /* ---------- Work categories ---------- */
@@ -206,7 +169,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 .bar-row .bar{grid-column:1/-1;height:4px;background:var(--line);border-radius:2px}
 .bar-row .bar i{display:block;height:100%;background:var(--lime);border-radius:2px}
 .bar-row b{color:var(--ink);font:700 12px var(--mono)}
-.stat-reels{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+
 .chip{padding:8px 12px;border:1px solid var(--line);border-radius:20px;font:700 11px var(--mono);letter-spacing:.05em;text-transform:uppercase;transition:.2s}
 .chip:hover{border-color:var(--lime);color:var(--lime)}
 
@@ -229,12 +192,10 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 .ad-player.is-playing .ad-play{opacity:0;pointer-events:none}
 
 /* ---------- Featured ad ---------- */
-.ad{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center;border-top:1px solid var(--line);padding-top:40px}
+
 .ad-player{position:relative;width:min(340px,70vw);aspect-ratio:9/16;border-radius:6px;overflow:hidden;background:#000;border:1px solid var(--line);cursor:pointer}
 .ad-player video{width:100%;height:100%;object-fit:cover;display:block}
-.ad-copy h2{font:400 clamp(40px,5vw,72px)/1 var(--display);text-transform:uppercase;margin:12px 0 16px}
-.ad-copy p{font-size:17px;line-height:1.7;color:var(--muted);max-width:520px}
-@media (max-width:800px){.ad{grid-template-columns:1fr;gap:28px;justify-items:center;text-align:center}.ad-copy p{margin:0 auto}}
+
 .reel{display:block}
 
 /* ---------- Play buttons v2: centred with inset+margin:auto, readable on any thumbnail ---------- */
@@ -246,23 +207,12 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 .reel i,.play,.ad-play{background:rgba(0,0,0,.5);border:2px solid rgba(255,255,255,.92);opacity:.78;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
 .reel:hover i,.case-media:hover .play,.ad-player:hover .ad-play{background:rgba(0,0,0,.65);opacity:1}
 
-/* ---------- Hero: text left, picture right ---------- */
-.hero{max-width:1240px;display:grid;grid-template-columns:1.15fr .85fr;gap:6vw;align-items:center;text-align:left;padding:150px 6vw 90px}
-.hero-text{min-width:0}
-.hero .hero-line{font:500 clamp(26px,3.3vw,46px)/1.28 var(--body);max-width:none;margin:0 0 40px;letter-spacing:-.01em}
-.hero-cta{justify-content:flex-start}
-.portrait{width:min(380px,100%);margin:0;justify-self:end}
-@media (max-width:900px){
-  .hero{grid-template-columns:1fr;gap:44px;padding:110px 5vw 60px}
-  .portrait{justify-self:center;width:min(320px,76vw)}
-}
-
 /* ---------- Grain: textured look across the whole site ---------- */
 body{background:
   radial-gradient(90% 60% at 15% 0%,rgba(200,255,0,.05),transparent 60%),
   radial-gradient(80% 60% at 100% 100%,rgba(255,255,255,.04),transparent 65%),
   var(--bg)}
-body:before,body:after{content:"";position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:450;background-size:240px 240px}
+body:before,body:after{content:"";position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:450;background-size:240px 240px}
 /* light specks */
 body:before{opacity:.2;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='a' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' seed='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  1.6 0 0 0 -.62'/></filter><rect width='240' height='240' filter='url(%23a)'/></svg>")}
 /* dark specks, so the grain also shows on bright photos */
@@ -295,10 +245,9 @@ body:before,body:after{z-index:-1}
 @media (prefers-reduced-motion:reduce){.acc-panel,.acc-icon,.acc-icon:before,.nav{transition:none}}
 
 /* ---------- Results: each card holds its own video ---------- */
-.stat-video{width:min(210px,100%);margin:0 0 20px}
 
 /* ---------- Hero v3: what I do (left) / ID card (middle) / about (right) ---------- */
-.hero{max-width:1320px;display:grid;grid-template-columns:1fr auto 1fr;gap:5vw;align-items:start;text-align:left;padding:0 6vw 100px}
+.hero{max-width:1320px;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:5vw;align-items:start;text-align:left;padding:0 6vw 100px}
 .hero-do,.hero-about{padding-top:190px;min-width:0}
 .hero-about{text-align:right}
 .hero .label{display:block;margin-bottom:18px}
@@ -332,11 +281,11 @@ body:before,body:after{z-index:-1}
 .id-photo{position:absolute;left:16px;right:16px;top:38px;bottom:104px;border-radius:9px;overflow:hidden;background:#000}
 .id-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;pointer-events:none}
 .id-info{position:absolute;left:18px;right:18px;bottom:14px;text-align:left}
-.id-info h2,.id-back h2{font:400 31px/1 var(--display);letter-spacing:.015em;text-transform:uppercase;margin:0 0 7px}
+.id-info h1,.id-back .id-name{font:400 31px/1 var(--display);letter-spacing:.015em;text-transform:uppercase;margin:0 0 7px}
 .id-info p,.id-back p{font:700 9.5px/1.6 var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--lime);margin:0}
 .id-info p span,.id-back p span{white-space:nowrap}
 .id-back{transform:rotateY(180deg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:36px 24px 28px;text-align:center;border-color:var(--lime)}
-.id-back h2{font-size:38px;margin-bottom:2px}
+.id-back .id-name{font-size:38px;margin-bottom:2px}
 .id-rule{display:block;width:44px;height:2px;background:var(--lime);margin:6px 0}
 .id-back small{font:700 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .id-bars{display:block;width:78%;height:34px;margin-top:12px;opacity:.85;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 5px,transparent 5px 9px,var(--ink) 9px 12px,transparent 12px 14px)}
@@ -344,7 +293,7 @@ body:before,body:after{z-index:-1}
 
 @media (prefers-reduced-motion:reduce){.id-card{transition:none}}
 
-@media (max-width:1000px){
+@media (max-width:1100px){
   .hero{grid-template-columns:1fr;gap:34px;padding:0 6vw 70px}
   .id-col{order:-1}
   .hero-do,.hero-about{padding-top:0}
@@ -553,3 +502,31 @@ html.intro-pending body{overflow:hidden}
 .cat--wide .cat-text p{max-width:620px}
 .reels--ig{gap:22px}
 .reels--ig .ig{aspect-ratio:10/18.3}
+
+
+/* ---------- UI review fixes ---------- */
+:root{color-scheme:dark}
+.section-head--gap{margin-top:96px}
+.sub--gap{margin-top:56px}
+
+/* Keyboard focus: one visible, consistent ring */
+a:focus-visible,button:focus-visible,[role="button"]:focus-visible,.vf-stat:focus-visible{outline:2px solid var(--lime);outline-offset:3px;border-radius:3px}
+.vf-stat:focus-visible{outline-offset:-6px}
+.id-card:focus-visible{outline-offset:8px;border-radius:16px}
+
+/* Bigger touch targets without moving the underlines */
+.contact-links a,.mini-link{padding-top:12px}
+.nav-links a{padding:10px 2px}
+.contact-links{row-gap:4px}
+
+/* Contrast and minimum size for small labels */
+.id-hint,footer,.stat-small span{color:var(--muted)}
+.stat-small span{font-size:10px}
+.vf-lab,.vf-lock{font-size:10px}
+.vf-lab{color:rgba(255,255,255,.62)}
+.vf-scale b{font-size:10px;color:rgba(255,255,255,.7)}
+.id-info p,.id-back p{font-size:10px}
+
+/* Instagram embeds: one consistent card, no scrollbar, no comment box */
+.reels--ig .ig{aspect-ratio:auto;height:600px;border-radius:14px;box-shadow:0 22px 50px -26px rgba(0,0,0,.95)}
+.reels--ig .ig iframe{height:calc(100% + 70px)}

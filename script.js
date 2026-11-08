@@ -430,3 +430,14 @@
   window.addEventListener('resize', queue);
   update();
 })();
+
+
+// ---------- Instagram cards: height follows width so the post fits without a scrollbar ----------
+// (header ~53px + media ~1.19 x width + like row ~140px; the comment box is cropped off)
+(() => {
+  const cards = [...document.querySelectorAll('.ig')];
+  if (!cards.length) return;
+  const fit = () => cards.forEach((el) => { el.style.height = Math.round(192 + 1.19 * el.getBoundingClientRect().width) + 'px'; });
+  fit();
+  window.addEventListener('resize', fit);
+})();
