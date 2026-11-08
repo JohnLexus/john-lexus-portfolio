@@ -542,3 +542,14 @@ html.intro-pending body{overflow:hidden}
   .cam-chip:nth-of-type(2){display:none}
 }
 @media (max-width:760px){.cam-chip + .cam-chip{display:none}.cam-top{gap:10px}.cam-skip{margin-left:0}}
+
+/* ---------- Instagram embeds (client work) ---------- */
+.reels--ig{grid-template-columns:repeat(3,1fr);gap:16px}
+.ig{position:relative;aspect-ratio:9/17;border-radius:10px;overflow:hidden;background:#fff;border:1px solid var(--line)}
+.ig iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
+@media (max-width:1100px){.reels--ig{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:700px){.reels--ig{grid-template-columns:1fr;max-width:420px}}
+.cat--wide{grid-template-columns:1fr;gap:26px}
+.cat--wide .cat-text p{max-width:620px}
+.reels--ig{gap:22px}
+.reels--ig .ig{aspect-ratio:10/18.3}
