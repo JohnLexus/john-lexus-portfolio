@@ -247,7 +247,7 @@ body:before,body:after{z-index:-1}
 /* ---------- Results: each card holds its own video ---------- */
 
 /* ---------- Hero v3: what I do (left) / ID card (middle) / about (right) ---------- */
-.hero{max-width:1320px;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:5vw;align-items:start;text-align:left;padding:0 6vw 100px}
+.hero{max-width:1320px;margin-inline:auto;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:5vw;align-items:start;text-align:left;padding:0 6vw 100px}
 .hero-do,.hero-about{padding-top:190px;min-width:0}
 .hero-about{text-align:right}
 .hero .label{display:block;margin-bottom:18px}
